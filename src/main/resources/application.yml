@@ -2,7 +2,6 @@ spring:
   profiles:
     active: local
     group:
-      test: test
       local: local, common
       blue: blue, common
       green: green, common
