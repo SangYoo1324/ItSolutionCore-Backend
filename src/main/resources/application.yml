@@ -1,11 +1,11 @@
 spring:
   profiles:
-    active: blue
-    group:
-      test: test
-      local: local, common
-      blue: blue, common
-      green: green, common
+  active: blue
+  group:
+    test: test
+    local: local, common
+    blue: blue, common
+    green: green, common
 
 server:
   env: blue
