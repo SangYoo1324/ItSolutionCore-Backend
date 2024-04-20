@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: blue
     group:
       test: test
       local: local, common
@@ -78,7 +78,7 @@ spring:
       on-profile: common
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rds-demo.cjykyawcgbun.us-west-2.rds.amazonaws.com/enterprise_2
+    url: jdbc:mysql://rds-demo.cjykyawcgbun.us-west-2.rds.amazonaws.com/itsolution_core
     username: sam
     password: Qwdf3696!
   jpa:
