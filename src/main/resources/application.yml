@@ -50,17 +50,17 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "https://itsolution.ps-its.com/login/oauth2/code/google"
+            redirect-uri: "https://ps-its.com/login/oauth2/code/google"
 server:
   port: 8080
   serverAddress: 100.21.105.141
-  publicAddress: "https://itsolution.ps-its.com"
+  publicAddress: "https://ps-its.com"
 
 serverName: blue_server
 
 redirection:
   url:
-    itSolution: "https://sangbeomyooportfolio.com"
+    itSolution: "https://sangbeomportfolio.ps-its.com"
     sunriseCC: "https://sunrisechristcc.org"
 
 s3:
@@ -77,16 +77,16 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "https://itsolution.ps-its.com/login/oauth2/code/google"
+            redirect-uri: "https://ps-its.com/login/oauth2/code/google"
 server:
   port: 8081
   serverAddress: 100.21.105.141
-  publicAddress: "https://itsolution.ps-its.com"
+  publicAddress: "https://ps-its.com"
 serverName: green_server
 
 redirection:
   url:
-    itSolution: "https://sangbeomyooportfolio.com"
+    itSolution: "https://sangbeomportfolio.ps-its.com"
     sunriseCC: "https://sunrisechristcc.org/"
 
 s3:
