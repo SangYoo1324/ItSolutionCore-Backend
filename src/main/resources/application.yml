@@ -42,19 +42,20 @@ s3:
 ---
 
 spring:
+  config:
+    activate:
+      on-profile: blue
   security:
     oauth2:
       client:
         registration:
           google:
             redirect-uri: "https://itsolution.ps-its.com"
-  config:
-    activate:
-      on-profile: blue
 server:
   port: 8080
   serverAddress: 100.21.105.141
   publicAddress: "https://itsolution.ps-its.com"
+
 serverName: blue_server
 
 redirection:
@@ -68,15 +69,15 @@ s3:
 ---
 
 spring:
+  config:
+    activate:
+      on-profile: green
   security:
     oauth2:
       client:
         registration:
           google:
             redirect-uri: "https://itsolution.ps-its.com"
-  config:
-    activate:
-      on-profile: green
 server:
   port: 8081
   serverAddress: 100.21.105.141
