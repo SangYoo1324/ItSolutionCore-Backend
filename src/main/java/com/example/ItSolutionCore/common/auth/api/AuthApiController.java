@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -25,6 +26,7 @@ public class AuthApiController {
     private final AuthService authService;
 
     private final OriginDeterminer originDeterminer;
+
 
     @PostMapping("/api/signup")
     public ResponseEntity<?> signup(@RequestBody MemberDto memberDto,  @CookieValue(value = "origin", defaultValue = "itSolution") String origin){
@@ -66,7 +68,7 @@ public class AuthApiController {
     /*
     * OAuth2 login link. must include origin to be redirected to the intended business frontend website.
     * */
-    @GetMapping("/api/public/google/login/{origin}")
+    @GetMapping("/api/public/google/login/{origin}")  // origin= itSolution, sunriseCC, etc...
     public void googleOAuth2login(HttpServletResponse response, @PathVariable String origin, HttpSession session){
 
         // let httpSession store the origin with key business. it will be utilized to set redirection url
@@ -74,7 +76,7 @@ public class AuthApiController {
             log.info("session info from API :::"+session.getAttribute("business").toString());
 
         try {
-            response.sendRedirect("http://localhost:8080/oauth2/authorization/google");
+            response.sendRedirect(originDeterminer.OAuth2OriginDeterminer(origin)+"/oauth2/authorization/google");
         } catch (IOException e) {
            e.printStackTrace();
         }
