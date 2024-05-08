@@ -7,9 +7,7 @@ spring:
       blue: blue
       green: green
 
-server:
-  env: blue
-  publicAddress: "http://localhost:8080"
+
 ---
 
 spring:
@@ -19,6 +17,7 @@ spring:
 server:
   port: 8080
   serverAddress: localhost
+  elbAddress: "http://locahost:8080"
 
 serverName: local_server
 
@@ -39,6 +38,7 @@ spring:
 server:
   port: 8080
   serverAddress: 100.21.105.141
+  elbAddress: "https://itsolution.ps-its.com"
 
 serverName: blue_server
 
@@ -59,6 +59,7 @@ spring:
 server:
   port: 8081
   serverAddress: 100.21.105.141
+  elbAddress: "https://itsolution.ps-its.com"
 
 serverName: green_server
 
