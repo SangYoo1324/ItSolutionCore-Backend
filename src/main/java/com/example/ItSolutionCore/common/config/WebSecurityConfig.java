@@ -98,7 +98,7 @@ public class WebSecurityConfig {
 
                 .exceptionHandling(exc-> exc.authenticationEntryPoint(jwtAuthenticationEntryPoint).accessDeniedHandler(jwtAccessDeniedHandler))
                 .authorizeHttpRequests(httpRequest->httpRequest
-                        .requestMatchers("/api/signup/**", "/login").permitAll()
+                        .requestMatchers("/api/signup/**", "/login", "/env","/hc").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/error").permitAll()// error path(not api url)
                         .requestMatchers("/api/auth/**").authenticated()
