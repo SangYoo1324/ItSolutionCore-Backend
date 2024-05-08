@@ -76,7 +76,8 @@ public class WebSecurityConfig {
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://www.sangbeomyooportfolio.com"));
+                        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000",
+                                "https://www.sangbeomyooportfolio.com", "https://ps-its.com", "https://sangbeomportfolio.ps-its.com"));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
                         configuration.setAllowedHeaders(Collections.singletonList("*"));
