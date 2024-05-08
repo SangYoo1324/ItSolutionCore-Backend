@@ -7,6 +7,8 @@ spring:
       blue: blue
       green: green
 
+server:
+  env: blue
 
 ---
 
@@ -17,8 +19,7 @@ spring:
 server:
   port: 8080
   serverAddress: localhost
-  elbAddress: "http://locahost:8080"
-
+  publicAddress: "http://localhost:8080"
 serverName: local_server
 
 redirection:
@@ -38,8 +39,7 @@ spring:
 server:
   port: 8080
   serverAddress: 100.21.105.141
-  elbAddress: "https://itsolution.ps-its.com"
-
+  publicAddress: "https://itsolution.ps-its.com"
 serverName: blue_server
 
 redirection:
@@ -59,8 +59,7 @@ spring:
 server:
   port: 8081
   serverAddress: 100.21.105.141
-  elbAddress: "https://itsolution.ps-its.com"
-
+  publicAddress: "https://itsolution.ps-its.com"
 serverName: green_server
 
 redirection:

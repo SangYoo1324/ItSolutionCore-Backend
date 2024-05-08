@@ -30,8 +30,8 @@ public class AuthApiController {
 
     //dev env is just endpoint WAS addr localhostL8080
     //prod env comes with elb addr
-    @Value("${server.elbAddress}")
-    private String elbAddr;
+    @Value("${server.publicAddress}")
+    private String publicAddress;
 
     @PostMapping("/api/signup")
     public ResponseEntity<?> signup(@RequestBody MemberDto memberDto,  @CookieValue(value = "origin", defaultValue = "itSolution") String origin){
@@ -81,7 +81,7 @@ public class AuthApiController {
             log.info("session info from API :::"+session.getAttribute("business").toString());
 
         try {
-            response.sendRedirect(elbAddr+"/oauth2/authorization/google");
+            response.sendRedirect(publicAddress+"/oauth2/authorization/google");
         } catch (IOException e) {
            e.printStackTrace();
         }
