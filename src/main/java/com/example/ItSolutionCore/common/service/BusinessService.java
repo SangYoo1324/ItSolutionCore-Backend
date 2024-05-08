@@ -2,9 +2,8 @@ package com.example.ItSolutionCore.common.service;
 
 
 import com.example.ItSolutionCore.common.dto.BusinessDto;
-import com.example.ItSolutionCore.common.dto.MemberDto;
 import com.example.ItSolutionCore.common.entity.Business;
-import com.example.ItSolutionCore.common.entity.Member;
+import com.example.ItSolutionCore.common.auth.entity.Member;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.repo.BusinessRepository;
 import com.example.ItSolutionCore.common.repo.MemberRepository;
@@ -15,9 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

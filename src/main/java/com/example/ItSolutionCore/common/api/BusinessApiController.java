@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/api/public")
 public class BusinessApiController
 {
     private final BusinessService businessService;
 
 
-    @PostMapping("/api/business")
+    @PostMapping("/business")
     public ResponseEntity<?> postBusiness(@RequestBody BusinessDto businessDto){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(businessService.createBusiness(businessDto));
@@ -31,7 +32,7 @@ public class BusinessApiController
 
     }
 
-    @GetMapping("/api/business")
+    @GetMapping("/business")
     public ResponseEntity<?> getAllBusiness(){
 
             return ResponseEntity.status(HttpStatus.OK).body(businessService.getAllBusiness());
@@ -42,7 +43,7 @@ public class BusinessApiController
 //    }
 
 
-    @GetMapping("/api/business/users/{id}")
+    @GetMapping("/business/users/{id}")
     public ResponseEntity<?> getAllUser(@PathVariable Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(businessService.getMembersByBusiness(id));

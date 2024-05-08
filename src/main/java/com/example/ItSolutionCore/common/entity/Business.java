@@ -1,6 +1,7 @@
 package com.example.ItSolutionCore.common.entity;
 
 
+import com.example.ItSolutionCore.common.auth.entity.Member;
 import com.example.ItSolutionCore.common.dto.BusinessDto;
 import com.example.ItSolutionCore.enums.PlanType;
 import jakarta.persistence.*;
@@ -10,9 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data

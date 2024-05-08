@@ -1,14 +1,12 @@
 package com.example.ItSolutionCore.common.dto;
 
-import com.example.ItSolutionCore.common.entity.Business;
-import com.example.ItSolutionCore.common.entity.Member;
+import com.example.ItSolutionCore.common.auth.entity.Member;
 import com.example.ItSolutionCore.enums.PlanType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor

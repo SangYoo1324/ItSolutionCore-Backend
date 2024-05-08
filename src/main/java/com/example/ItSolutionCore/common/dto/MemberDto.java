@@ -17,6 +17,7 @@ public class MemberDto {
     private Long id;
 
     private String username;
+    private String name;
 
     private String email;
 
@@ -27,4 +28,5 @@ public class MemberDto {
     private Role authority;
 
     private String provider;
+    private boolean verified;
 }

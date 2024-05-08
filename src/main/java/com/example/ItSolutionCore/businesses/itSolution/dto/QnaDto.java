@@ -1,12 +1,8 @@
 package com.example.ItSolutionCore.businesses.itSolution.dto;
 
-import com.example.ItSolutionCore.common.entity.Member;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Data
 @Builder

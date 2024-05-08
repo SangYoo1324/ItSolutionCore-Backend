@@ -1,0 +1,72 @@
+spring:
+  profiles:
+    active: local
+    group:
+      test: test
+      local: local
+      blue: blue
+      green: green
+
+server:
+  env: blue
+  publicAddress: "http://localhost:8080"
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+server:
+  port: 8080
+  serverAddress: localhost
+
+serverName: local_server
+
+redirection:
+  url:
+    itSolution: "http://localhost:3000"
+    sunriseCC: "http://localhost:4200"
+s3:
+  local:
+    path: "C:\\Users\\samue\\Downloads\\"
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: blue
+server:
+  port: 8080
+  serverAddress: 100.21.105.141
+
+serverName: blue_server
+
+redirection:
+  url:
+    itSolution: "https://https://www.sangbeomyooportfolio.com/"
+    sunriseCC: "https://https://sunrisechristcc.org/"
+
+s3:
+  local:
+    path: "/home/ubuntu/"
+---
+
+spring:
+  config:
+    activate:
+      on-profile: green
+server:
+  port: 8081
+  serverAddress: 100.21.105.141
+
+serverName: green_server
+
+redirection:
+  url:
+    itSolution: "https://https://www.sangbeomyooportfolio.com/"
+    sunriseCC: "https://https://sunrisechristcc.org/"
+
+s3:
+  local:
+    path: "/home/ubuntu/"

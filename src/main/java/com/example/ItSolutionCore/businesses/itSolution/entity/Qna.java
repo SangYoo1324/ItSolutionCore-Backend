@@ -2,28 +2,27 @@ package com.example.ItSolutionCore.businesses.itSolution.entity;
 
 
 import com.example.ItSolutionCore.businesses.itSolution.dto.QnaDto;
-import com.example.ItSolutionCore.common.entity.Member;
+import com.example.ItSolutionCore.common.auth.entity.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="qna")
 public class Qna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="member_id", referencedColumnName = "id")
-    private Member member;
+/*     No Choice. Each Basic & Advanced plan businesses will have their own DB.
+     But, Member DB is universal use, so It's in the common DB.*/
+    private Long member_id;
 
     private String title;
 
@@ -38,7 +37,7 @@ public class Qna {
         return QnaDto.builder()
                 .id(this.getId())
                 .content(this.getContent())
-                .member_id(this.getMember().getId())
+                .member_id(member_id)
                 .title(this.getTitle())
                 .date(this.date.toString().substring(0,10))
                 .build();

@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/api/public")
 public class QnaApiController {
 
     private final QnaService qnaService;
 
-    @PostMapping("/api/qna")
+    @PostMapping("/qna")
     public ResponseEntity<?> postQna(@RequestBody QnaDto qnaDto){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(qnaService.postQna(qnaDto));
@@ -29,12 +30,12 @@ public class QnaApiController {
         }
     }
 
-    @GetMapping("/api/qna")
+    @GetMapping("/qna")
     public ResponseEntity<?> fetchAllQna(){
         return ResponseEntity.status(HttpStatus.OK).body(qnaService.fetchAll());
     }
 
-    @GetMapping("/api/qna/{id}")
+    @GetMapping("/qna/{id}")
     public ResponseEntity<?> fetchQna(@PathVariable Long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(qnaService.fetchSingle(id));
