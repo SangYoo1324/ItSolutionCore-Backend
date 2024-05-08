@@ -81,7 +81,7 @@ public class AuthApiController {
             log.info("session info from API :::"+session.getAttribute("business").toString());
 
         try {
-            response.sendRedirect(+"/oauth2/authorization/google");
+            response.sendRedirect(elbAddr+"/oauth2/authorization/google");
         } catch (IOException e) {
            e.printStackTrace();
         }
