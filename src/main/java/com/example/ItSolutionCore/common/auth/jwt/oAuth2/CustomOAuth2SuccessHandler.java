@@ -76,7 +76,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String token = jwtUtil.createJwt(username, role);
 
         response.addCookie(createCookie("Authorization", token));
-        response.setHeader("Set-Cookie", "name=value; domain=www.ps-its.com; path=/");
+        response.setHeader("Set-Cookie", "name=value; domain=.ps-its.com; path=/");
         response.sendRedirect(redirectUrl);
 
     }
@@ -87,7 +87,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         cookie.setMaxAge((int) (Long.parseLong(exp)*60));
         // cookie also applied to redirection domain's sub domains like localhost:3000/login, localhost:3000/qna ..etc
         cookie.setPath("/");
-        cookie.setDomain("www.ps-its.com");
+//        cookie.setDomain(".ps-its.com");
         cookie.setHttpOnly(false);
 
         return cookie;
