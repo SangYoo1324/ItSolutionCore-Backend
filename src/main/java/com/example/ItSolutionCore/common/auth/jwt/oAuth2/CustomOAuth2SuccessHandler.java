@@ -70,13 +70,12 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
-        log.info("SucessHandler. getting authorities from principal. "+ auth);
+        log.info("SuccessHandler. getting authorities from principal. "+ auth);
         String role = auth.getAuthority();
-        log.info("SucessHandler. getting authorities from principal.getAuthority() "+ auth);
+        log.info("SuccessHandler. getting authorities from principal.getAuthority() "+ auth);
         String token = jwtUtil.createJwt(username, role);
 
         response.addCookie(createCookie("Authorization", token));
-        response.setHeader("Set-Cookie", "name=value; domain=www.ps-its.com; path=/");
         response.sendRedirect(redirectUrl);
 
     }
@@ -85,11 +84,11 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
 
         Cookie cookie = new Cookie(key, val);
         cookie.setMaxAge((int) (Long.parseLong(exp)*60));
-        // cookie also applied to redirection domain's sub domains like localhost:3000/login, localhost:3000/qna ..etc
         cookie.setPath("/");
-//        cookie.setDomain(".ps-its.com");
-        cookie.setHttpOnly(true);
-
+        cookie.setDomain("www.ps-its.com");
+        cookie.setSecure(true);
+        cookie.setHttpOnly(false);
+        cookie.getAttributes().forEach((key1, value) -> log.info(key1 + "," + value));
         return cookie;
     }
 
