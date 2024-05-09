@@ -14,7 +14,7 @@ public class ServletContainerCustomization {
         return factory -> {
             factory.addInitializers(servletContext -> {
                 servletContext.getSessionCookieConfig().setName("JSESSIONID");
-                servletContext.getSessionCookieConfig().setDomain(".ps-its.com");
+                servletContext.getSessionCookieConfig().setDomain("www.ps-its.com");
                 servletContext.getSessionCookieConfig().setPath("/");
                 servletContext.getSessionCookieConfig().setHttpOnly(false);
                 servletContext.getSessionCookieConfig().setSecure(false);
