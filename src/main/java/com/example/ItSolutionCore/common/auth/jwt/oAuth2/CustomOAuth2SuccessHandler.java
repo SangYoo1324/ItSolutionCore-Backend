@@ -76,7 +76,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String token = jwtUtil.createJwt(username, role);
 
         response.addCookie(createCookie("Authorization", token));
-        response.setHeader("Set-Cookie", "name=value; domain=.example.com; path=/");
+        response.setHeader("Set-Cookie", "name=value; domain=www.ps-its.com; path=/");
         response.sendRedirect(redirectUrl);
 
     }
