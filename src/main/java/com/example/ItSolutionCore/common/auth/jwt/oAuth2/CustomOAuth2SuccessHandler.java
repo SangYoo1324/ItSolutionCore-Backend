@@ -88,7 +88,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         // cookie also applied to redirection domain's sub domains like localhost:3000/login, localhost:3000/qna ..etc
         cookie.setPath("/");
 //        cookie.setDomain(".ps-its.com");
-        cookie.setHttpOnly(false);
+        cookie.setHttpOnly(true);
 
         return cookie;
     }
