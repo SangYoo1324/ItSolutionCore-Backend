@@ -87,7 +87,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         cookie.setMaxAge((int) (Long.parseLong(exp)*60));
         // cookie also applied to redirection domain's sub domains like localhost:3000/login, localhost:3000/qna ..etc
         cookie.setPath("/");
-        cookie.setDomain(".ps-its.com");
+        cookie.setDomain("www.ps-its.com");
         cookie.setHttpOnly(false);
 
         return cookie;
