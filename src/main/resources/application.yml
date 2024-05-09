@@ -60,7 +60,7 @@ serverName: blue_server
 
 redirection:
   url:
-    itSolution: "https://sangbeomportfolio.ps-its.com"
+    itSolution: "https://ps-its.com"
     sunriseCC: "https://sunrisechristcc.org"
 
 s3:
@@ -86,7 +86,7 @@ serverName: green_server
 
 redirection:
   url:
-    itSolution: "https://sangbeomportfolio.ps-its.com"
+    itSolution: "https://ps-its.com"
     sunriseCC: "https://sunrisechristcc.org/"
 
 s3:
