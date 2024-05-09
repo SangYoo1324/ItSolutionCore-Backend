@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -75,21 +76,28 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         log.info("SuccessHandler. getting authorities from principal.getAuthority() "+ auth);
         String token = jwtUtil.createJwt(username, role);
 
-        response.addCookie(createCookie("Authorization", token));
+        response.addHeader("Set-Cookie", createCookie("Authorization", token).toString());
         response.sendRedirect(redirectUrl);
 
     }
 
-    private Cookie createCookie(String key, String val){
+    private ResponseCookie createCookie(String key, String val){
 
-        Cookie cookie = new Cookie(key, val);
-        cookie.setMaxAge((int) (Long.parseLong(exp)*60));
-        cookie.setPath("/");
-        cookie.setDomain("www.ps-its.com");
-        cookie.setSecure(true);
-        cookie.setHttpOnly(false);
-        cookie.getAttributes().forEach((key1, value) -> log.info(key1 + "," + value));
-        return cookie;
+        ResponseCookie respCookie = ResponseCookie.from(key, val)
+                .path("/")
+                .sameSite("None")
+                .httpOnly(false)
+                .secure(true)
+                .maxAge((int) (Long.parseLong(exp)*60))
+                .build();
+//        cookie.setMaxAge((int) (Long.parseLong(exp)*60));
+//        cookie.setPath("/");
+//        cookie.setDomain("www.ps-its.com");
+//        cookie.setSecure(true);
+//        cookie.setHttpOnly(false);
+
+//        cookie.getAttributes().forEach((key1, value) -> log.info(key1 + "," + value));
+        return respCookie;
     }
 
 
