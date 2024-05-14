@@ -1,13 +1,11 @@
-package com.example.ItSolutionCore.businesses.sunrise.api;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.EventPostDto;
-import com.example.ItSolutionCore.businesses.sunrise.service.EventPostService;
+import com.example.ItSolutionCore.businesses.sunrise.api_service.service.EventPostService;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,21 +1,16 @@
-package com.example.ItSolutionCore.businesses.sunrise.service;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 
 
 import com.example.ItSolutionCore.businesses.sunrise.BusinessVars_sunrise;
-import com.example.ItSolutionCore.businesses.sunrise.dto.EventPostDto;
-import com.example.ItSolutionCore.businesses.sunrise.entity.EventPost;
-import com.example.ItSolutionCore.businesses.sunrise.entity.SunriseFile;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.EventPost;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.SunriseFile;
 import com.example.ItSolutionCore.businesses.sunrise.repo.EventPostRepository;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.service.S3Service;
-import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
 import com.example.ItSolutionCore.common.util.GenericUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

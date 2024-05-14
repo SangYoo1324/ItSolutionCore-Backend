@@ -1,13 +1,10 @@
 package com.example.ItSolutionCore.businesses.sunrise.repo;
 
-import com.example.ItSolutionCore.businesses.sunrise.entity.EventPost;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.EventPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 public interface EventPostRepository extends JpaRepository<EventPost, Long> {
 

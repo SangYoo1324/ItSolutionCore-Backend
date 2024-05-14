@@ -1,9 +1,7 @@
-package com.example.ItSolutionCore.businesses.sunrise.entity;
+package com.example.ItSolutionCore.businesses.sunrise.data.entity;
 
-import com.example.ItSolutionCore.common.entityAbstract.PublicZoneFile;
 import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
 import jakarta.persistence.*;
-import jdk.jfr.Event;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -38,6 +36,9 @@ public class SunriseFile {
     @JoinColumn(name="photoEvent_id", referencedColumnName = "id")
     private PhotoEvent photoEvent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="news_id", referencedColumnName = "id")
+    private News news;
 
     public SunriseFile(String fileName, String filePath, String s3_url, String contentType, Long size, Timestamp registeredDate) {
         this.fileName = fileName;

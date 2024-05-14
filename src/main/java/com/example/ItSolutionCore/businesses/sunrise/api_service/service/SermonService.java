@@ -1,7 +1,7 @@
-package com.example.ItSolutionCore.businesses.sunrise.service;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.SermonDto;
-import com.example.ItSolutionCore.businesses.sunrise.entity.Sermon;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.Sermon;
 import com.example.ItSolutionCore.businesses.sunrise.repo.SermonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

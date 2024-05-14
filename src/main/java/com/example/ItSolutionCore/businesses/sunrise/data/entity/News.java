@@ -1,10 +1,12 @@
-package com.example.ItSolutionCore.businesses.sunrise.entity;
+package com.example.ItSolutionCore.businesses.sunrise.data.entity;
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.NewsDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.NewsDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,11 +32,12 @@ public class News {
     String time;
     @Column
     boolean recurring;
-    @Column
-    private String cloudinaryUrl;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy ="news", fetch = FetchType.LAZY)
+    private List<SunriseFile> sunriseFiles = new ArrayList<>();
 
     public NewsDto toNewsDto(){
         return NewsDto.builder()
@@ -44,7 +47,6 @@ public class News {
                 .endDate(this.endDate)
                 .dayOfWeek(this.dayOfWeek)
                 .recurring(this.recurring)
-                .cloudinaryUrl(this.cloudinaryUrl)
                 .description(this.description)
                 .time(this.time)
                 .build();

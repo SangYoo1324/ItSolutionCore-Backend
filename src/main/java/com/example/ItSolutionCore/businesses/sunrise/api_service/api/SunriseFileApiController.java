@@ -1,10 +1,9 @@
-package com.example.ItSolutionCore.businesses.sunrise.api;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 
 import com.example.ItSolutionCore.businesses.sunrise.BusinessVars_sunrise;
-import com.example.ItSolutionCore.businesses.sunrise.service.SunrisePublicFileService;
+import com.example.ItSolutionCore.businesses.sunrise.api_service.service.SunrisePublicFileService;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
-import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

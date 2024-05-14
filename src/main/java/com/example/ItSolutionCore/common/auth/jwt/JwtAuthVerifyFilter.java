@@ -35,6 +35,11 @@ public class JwtAuthVerifyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        if(uri.startsWith("/hc")){
+            filterChain.doFilter(request,response);
+            return; // passing healthCheck
+        }
 
 
         String authorization= request.getHeader("Authorization");
@@ -42,7 +47,7 @@ public class JwtAuthVerifyFilter extends OncePerRequestFilter {
         //Authorization header exist?
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 
-            log.info("token null. header based auth verification failed.");
+//            log.info("token null. header based auth verification failed.");
             filterChain.doFilter(request, response);
             return;
         }

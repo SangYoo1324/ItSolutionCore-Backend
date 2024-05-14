@@ -1,12 +1,9 @@
-package com.example.ItSolutionCore.businesses.sunrise.dto;
+package com.example.ItSolutionCore.businesses.sunrise.data.dto;
 
-import com.example.ItSolutionCore.businesses.sunrise.entity.PhotoEvent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
 @Data

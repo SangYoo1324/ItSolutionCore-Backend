@@ -1,8 +1,8 @@
-package com.example.ItSolutionCore.businesses.sunrise.api;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.SermonDto;
-import com.example.ItSolutionCore.businesses.sunrise.service.SermonService;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonDto;
+import com.example.ItSolutionCore.businesses.sunrise.api_service.service.SermonService;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

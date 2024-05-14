@@ -35,6 +35,11 @@ public class JwtOAuth2VerifyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        if(uri.startsWith("/hc")){
+            filterChain.doFilter(request,response);
+            return; // passing healthCheck
+        }
 
         /*
         * Checking previous filter's flag for pre-auth-success by header based verification.
@@ -43,7 +48,7 @@ public class JwtOAuth2VerifyFilter extends OncePerRequestFilter {
             log.info("it passed the auth verification from former filter JWTAuthVerificationFilter. No need for Cookie filter");
             filterChain.doFilter(request,response);
             return;
-        }else log.info("it failed the auth verification from former filter JWTAuthVerifyFilter. Need cookie filter for Authentication..");
+        }
 
 
 
@@ -54,7 +59,7 @@ public class JwtOAuth2VerifyFilter extends OncePerRequestFilter {
         // add jwt token to authorization variable
             for(Cookie cookie: cookies){
 
-                log.info("cookie name::"+ cookie.getName());
+                log.debug("cookie name::"+ cookie.getName());
                 if(cookie.getName().equals("Authorization")){
                     authorization = cookie.getValue();
                 }

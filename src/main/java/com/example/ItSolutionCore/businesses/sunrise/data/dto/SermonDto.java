@@ -1,4 +1,4 @@
-package com.example.ItSolutionCore.businesses.sunrise.dto;
+package com.example.ItSolutionCore.businesses.sunrise.data.dto;
 
 import lombok.Builder;
 import lombok.Data;

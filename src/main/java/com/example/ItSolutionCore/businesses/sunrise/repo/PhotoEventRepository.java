@@ -1,11 +1,9 @@
 package com.example.ItSolutionCore.businesses.sunrise.repo;
 
-import com.example.ItSolutionCore.businesses.sunrise.entity.PhotoEvent;
-import com.example.ItSolutionCore.businesses.sunrise.entity.SunriseFile;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.PhotoEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface PhotoEventRepository extends JpaRepository<PhotoEvent, Long> {

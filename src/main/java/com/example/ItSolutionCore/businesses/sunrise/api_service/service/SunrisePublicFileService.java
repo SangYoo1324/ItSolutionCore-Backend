@@ -1,10 +1,10 @@
-package com.example.ItSolutionCore.businesses.sunrise.service;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 
 
 import com.example.ItSolutionCore.businesses.sunrise.BusinessVars_sunrise;
-import com.example.ItSolutionCore.businesses.sunrise.entity.EventPost;
-import com.example.ItSolutionCore.businesses.sunrise.entity.PhotoEvent;
-import com.example.ItSolutionCore.businesses.sunrise.entity.SunriseFile;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.News;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.PhotoEvent;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.SunriseFile;
 import com.example.ItSolutionCore.businesses.sunrise.repo.SunriseFileRepository;
 import com.example.ItSolutionCore.common.service.S3Service;
 import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
@@ -60,6 +60,9 @@ public class SunrisePublicFileService {
                 file.setPhotoEvent((PhotoEvent) entity);
                 break;
 
+            case "News":
+                file.setNews((News) entity);
+                break;
 
             default:
                 break;

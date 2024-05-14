@@ -1,8 +1,7 @@
-package com.example.ItSolutionCore.businesses.sunrise.api;
+package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.PhotoEventDto;
-import com.example.ItSolutionCore.businesses.sunrise.service.PhotoEventService;
+import com.example.ItSolutionCore.businesses.sunrise.api_service.service.PhotoEventService;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;

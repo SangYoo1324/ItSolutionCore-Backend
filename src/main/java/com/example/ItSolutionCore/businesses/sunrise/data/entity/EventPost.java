@@ -1,6 +1,6 @@
-package com.example.ItSolutionCore.businesses.sunrise.entity;
+package com.example.ItSolutionCore.businesses.sunrise.data.entity;
 
-import com.example.ItSolutionCore.businesses.sunrise.dto.EventPostDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.EventPostDto;
 import jakarta.persistence.*;
 import lombok.*;
 

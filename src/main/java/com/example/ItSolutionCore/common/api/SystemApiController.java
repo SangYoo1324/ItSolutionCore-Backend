@@ -1,6 +1,8 @@
 package com.example.ItSolutionCore.common.api;
 
 
+import com.example.ItSolutionCore.common.dto.GenericResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ Health check, docker curl for server check
 */
 
 @RestController
+@Slf4j
 public class SystemApiController {
 
     @Value("${server.env}")  // blue, green, local
@@ -39,8 +42,8 @@ public class SystemApiController {
         resp.put("serverAddress", serverAddress);
         resp.put("serverPort", serverPort);
         resp.put("env", env);
-
-        return ResponseEntity.status(HttpStatus.OK).body(resp);
+        log.info("hc api");
+        return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("hi").build());
     }
 
     @GetMapping("/env")

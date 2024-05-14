@@ -19,7 +19,7 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        log.error("UnAunthenticated request: "+ request.getRequestURI());
+        log.debug("UnAunthenticated request: "+ request.getRequestURI());
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
