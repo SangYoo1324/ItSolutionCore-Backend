@@ -1,15 +1,16 @@
 package com.example.ItSolutionCore.businesses.sunrise.entity;
 
+import com.example.ItSolutionCore.businesses.sunrise.dto.SermonDto;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@Table(name="sermon")
 public class Sermon {
 
     @Id
@@ -33,6 +34,16 @@ public class Sermon {
         this.title = title;
         this.date = date;
         this.scripture = scripture;
+    }
+
+    public SermonDto toDto(){
+        return SermonDto.builder()
+                .id(this.id)
+                .date(this.date)
+                .iframe(this.iframe)
+                .scripture(this.scripture)
+                .title(this.title)
+                .build();
     }
 
 

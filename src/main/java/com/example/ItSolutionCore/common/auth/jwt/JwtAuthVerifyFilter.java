@@ -79,8 +79,8 @@ public class JwtAuthVerifyFilter extends OncePerRequestFilter {
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetail, null, customUserDetail.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authToken);
-        request.setAttribute("passedAuth", true);
-        log.info("passedAuth set to true. will skip the JwtOAuth2VerifyFilter");
+//        request.setAttribute("passedAuth", true);
+//        log.info("passedAuth set to true. will skip the JwtOAuth2VerifyFilter");
         filterChain.doFilter(request, response);
     }
 }

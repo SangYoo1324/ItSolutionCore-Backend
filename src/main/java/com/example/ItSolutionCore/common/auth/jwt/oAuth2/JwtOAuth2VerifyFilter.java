@@ -22,8 +22,9 @@ import java.io.IOException;
 *
 * OAuth2 authenticated users store JWT token into cookie. This class contains cookie based authentication verification logic.
 * Check JwtAuth filter contains request header based authentication verification logic.
-*
 * This Filter goes after JwtAuthVerifyFilter. So, it should deny the request doesn't have Authorization cookie
+*
+*  @version update 05/09/24 - Now, frontend doesn't use Authorization cookie. So, it will just pass through
 * */
 
 @RequiredArgsConstructor
@@ -61,11 +62,9 @@ public class JwtOAuth2VerifyFilter extends OncePerRequestFilter {
 
         }
 
-        log.info("authorization cookie = "+ authorization);
 
         //Token existence validation
         if(authorization == null){
-            log.info("Cookie doesn't contain any authorization key. just pass to the next chain");
             filterChain.doFilter(request,response);
             return;
         }

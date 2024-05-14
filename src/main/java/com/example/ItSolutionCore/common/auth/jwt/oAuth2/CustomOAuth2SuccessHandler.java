@@ -74,7 +74,8 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
         log.info("SuccessHandler. getting authorities from principal. "+ auth);
         String role = auth.getAuthority();
         log.info("SuccessHandler. getting authorities from principal.getAuthority() "+ auth);
-        String token = jwtUtil.createJwt(username, role);
+        // tempToken dura 30sec
+        String token = jwtUtil.createJwt(username, role, true);
 
 //        response.addHeader("Set-Cookie", createCookie("Authorization", token).toString());
         response.sendRedirect(redirectUrl+"?token="+token);

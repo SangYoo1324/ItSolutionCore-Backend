@@ -15,6 +15,7 @@ import com.example.ItSolutionCore.enums.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -80,6 +81,14 @@ public class AuthService {
             memberRepository.save(member);
         }
 
+    }
+
+    public String ResolveTempToken(String tempToken){
+       if(jwtUtil.getCategory(tempToken).equals("temp")){
+         return jwtUtil.createJwt(jwtUtil.getUsername(tempToken),jwtUtil.getRole(tempToken), false );
+       }
+       else
+           return null;
     }
 
 

@@ -8,6 +8,7 @@ import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.repo.BusinessRepository;
 import com.example.ItSolutionCore.common.repo.MemberRepository;
 import com.example.ItSolutionCore.enums.Role;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,10 +45,16 @@ public class MemberService {
         return memberRepository.findById(memberDto.getId()).orElseThrow(()-> new DataNotFoundException("member not found..")).toDto();
     }
 
-    public MemberDto fetchUserInfo(String jwtToken) throws DataNotFoundException {
-        String username = jwtUtil.getUsername(jwtToken);
+    public MemberDto fetchUserInfo(String jwtToken, HttpServletResponse response) throws DataNotFoundException {
+        // means it's tempToken lasting only 30 sec, So, need to renew to regular access token
+        if(jwtUtil.getCategory(jwtToken).equals("temp")){
+            //update temp token to access token
+            String accessToken=jwtUtil.createJwt(jwtUtil.getUsername(jwtToken),jwtUtil.getRole(jwtToken), false );
+            response.setHeader("Authorization", "Baerer "+accessToken);
+        }
 
-        Member target = memberRepository.findByUsername(username).orElseThrow(()-> new DataNotFoundException("cannof find user"));
+        String username = jwtUtil.getUsername(jwtToken);
+        Member target = memberRepository.findByUsername(username).orElseThrow(()-> new DataNotFoundException("cannot find user"));
 
         return target.toDto();
     }

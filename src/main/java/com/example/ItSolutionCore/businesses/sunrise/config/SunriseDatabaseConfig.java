@@ -1,6 +1,7 @@
 package com.example.ItSolutionCore.businesses.sunrise.config;
 
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,13 +28,13 @@ public class SunriseDatabaseConfig {
     @Bean
     public PlatformTransactionManager sunriseTransactionManager(){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(sunriseEntityManager().getObject());
+        transactionManager.setEntityManagerFactory(sunriseEntityManager());
 
         return transactionManager;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean sunriseEntityManager(){
+    public EntityManagerFactory sunriseEntityManager(){
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(sunriseDataSource());
@@ -45,7 +46,8 @@ public class SunriseDatabaseConfig {
         properties.put("hibernate.hbm2ddl.auto", "update");
 
         em.setJpaPropertyMap(properties);
-        return em;
+        em.afterPropertiesSet(); // 필수로 호출해야 합니다.
+        return em.getObject();
     }
 
     @Bean

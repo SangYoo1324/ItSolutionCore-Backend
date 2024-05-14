@@ -61,7 +61,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String useranme = customUserDetails.getUsername();
         Iterator<? extends GrantedAuthority> it = authResult.getAuthorities().iterator();
-       String token = jwtUtil.createJwt(useranme, it.next().getAuthority());
+       String token = jwtUtil.createJwt(useranme, it.next().getAuthority(), false);
 
        log.info("Login attempt generated new Token:: {}", token);
         response.addHeader("Authorization", "Bearer "+token);

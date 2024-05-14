@@ -6,6 +6,7 @@ import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import com.example.ItSolutionCore.common.dto.MemberDto;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.util.OriginDeterminer;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -97,6 +98,15 @@ public class AuthApiController {
     public ResponseEntity<?> adminTest(){
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Admin Ahtorization API test").build());
     }
+
+    //Temp token verificatio logic moved to fetchUserInfo
+//    @GetMapping("api/public/tempToken")
+//    public ResponseEntity<?> resolveTempToken(HttpServletRequest request, HttpServletResponse response){
+//        log.info(request.getHeader("Authorization"));
+//
+//        response.addHeader("Authorization", "Baerer "+ authService.ResolveTempToken(request.getHeader("Authorization").split(" ")[1]));
+//        return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().build());
+//    }
 
 
 }

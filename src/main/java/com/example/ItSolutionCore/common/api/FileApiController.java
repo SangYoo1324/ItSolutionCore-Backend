@@ -1,6 +1,6 @@
 package com.example.ItSolutionCore.common.api;
 
-import com.example.ItSolutionCore.common.auth.service.S3Service;
+import com.example.ItSolutionCore.common.service.S3Service;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class FileApiController {
 
         try {
 
-            return ResponseEntity.status(HttpStatus.OK).body(  GenericResponseDto.builder().response(s3Service.imageUpload(multipartFile)).build());
+            return ResponseEntity.status(HttpStatus.OK).body(  GenericResponseDto.builder().response(s3Service.imageUpload(multipartFile,"sunrise", "direct_upload").toString()).build());
         } catch (IOException e) {
            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(  GenericResponseDto.builder().error("error occured on storing image").errorCode(500).build());

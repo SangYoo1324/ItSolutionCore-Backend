@@ -27,6 +27,10 @@ public class JwtUtil {
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
+    public String getCategory(String token){
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("category", String.class);
+    }
+
     public String getUsername(String token){
         // if secretKey is forged, parser will throw an error
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
@@ -48,9 +52,10 @@ public class JwtUtil {
 
 
 
-    public String createJwt(String username, String role){
-        long expDura = Long.parseLong(this.exp)*1000*60;
+    public String createJwt(String username, String role, boolean isTemp){
+        long expDura = isTemp? 30*1000 : Long.parseLong(this.exp)*1000*60;
         return Jwts.builder()
+                .claim("category", isTemp? "temp": "access")
                 .claim("username", username)
                 .claim("role",role)
                 .issuedAt(new Date(System.currentTimeMillis()))
