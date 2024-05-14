@@ -30,7 +30,7 @@ public class CorsConfig  implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "*");
-
+        response.setHeader("Access-Control-Expose-Headers", "Authorization");
         // pass through preflight request with OPTIONS
         if("OPTIONS".equalsIgnoreCase(request.getMethod())) {// if request's method = OPTIONS
             response.setStatus(HttpServletResponse.SC_OK); // end  filterChain and proceed with 200 status
