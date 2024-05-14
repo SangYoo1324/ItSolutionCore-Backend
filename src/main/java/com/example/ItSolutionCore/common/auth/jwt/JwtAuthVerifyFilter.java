@@ -36,6 +36,13 @@ public class JwtAuthVerifyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        if("OPTIONS".equalsIgnoreCase(request.getMethod())) {// if request's method = OPTIONS
+            response.setStatus(HttpServletResponse.SC_OK); // end  filterChain and proceed with 200 status
+        }else {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authorization= request.getHeader("Authorization");
 
         //Authorization header exist?
