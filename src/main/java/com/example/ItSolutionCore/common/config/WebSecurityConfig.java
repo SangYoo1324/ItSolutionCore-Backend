@@ -72,24 +72,25 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http
-                .cors(corsCustomizer-> corsCustomizer.configurationSource(new CorsConfigurationSource() {
-                    @Override
-                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        CorsConfiguration configuration = new CorsConfiguration();
-
-                        configuration.setAllowedOrigins(List.of("http://localhost:3000",
-                                "https://www.sangbeomyooportfolio.com", "https://ps-its.com", "https://www.ps-its.com"));
-                        configuration.setAllowedMethods(Collections.singletonList("*"));
-                        configuration.setAllowCredentials(true);
-                        configuration.setAllowedHeaders(List.of("GET, POST, PUT, DELETE, OPTIONS, PATCH, OPTIONS"));
-                        configuration.setMaxAge(3600L);
-
-                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
-                        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-
-                        return configuration;
-                    }
-                }))
+                .cors(cors->cors.disable())
+//                .cors(corsCustomizer-> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+//                    @Override
+//                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+//                        CorsConfiguration configuration = new CorsConfiguration();
+//
+//                        configuration.setAllowedOrigins(List.of("http://localhost:3000",
+//                                "https://www.sangbeomyooportfolio.com", "https://ps-its.com", "https://www.ps-its.com"));
+//                        configuration.setAllowedMethods(Collections.singletonList("*"));
+//                        configuration.setAllowCredentials(true);
+//                        configuration.setAllowedHeaders(List.of("GET, POST, PUT, DELETE, OPTIONS, PATCH, OPTIONS"));
+//                        configuration.setMaxAge(3600L);
+//
+//                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
+//                        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+//
+//                        return configuration;
+//                    }
+//                }))
                 .csrf(csrf-> csrf.disable())
                 .formLogin(auth->auth.disable())
                 .httpBasic(auth->auth.disable())
