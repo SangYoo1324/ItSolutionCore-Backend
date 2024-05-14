@@ -2,6 +2,7 @@ package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 import com.example.ItSolutionCore.businesses.sunrise.api_service.service.NewsService;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
+import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,19 @@ public class NewsApiController {
     @GetMapping(value="/news")
     public ResponseEntity<?> fetchAll(){
         return ResponseEntity.status(HttpStatus.OK).body(newsService.fetchAllEvents());
+    }
+
+    @DeleteMapping(value = "/news/{id}")
+    public ResponseEntity<?> uploadWeekly(@PathVariable Long id) {
+
+        try {
+            newsService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Deleted").build());
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().errorCode(500).build());
+        }
+
     }
 
 }

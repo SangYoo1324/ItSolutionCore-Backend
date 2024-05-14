@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PhotoEventDto {
-
+    private Long id;
     private String title;
     private String subTitle;
     private List<String> s3_urls;

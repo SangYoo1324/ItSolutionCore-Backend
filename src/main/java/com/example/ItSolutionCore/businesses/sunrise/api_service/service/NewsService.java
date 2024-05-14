@@ -3,7 +3,10 @@ package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 import com.example.ItSolutionCore.businesses.sunrise.BusinessVars_sunrise;
 import com.example.ItSolutionCore.businesses.sunrise.data.dto.NewsDto;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.News;
+import com.example.ItSolutionCore.businesses.sunrise.data.entity.SunriseFile;
 import com.example.ItSolutionCore.businesses.sunrise.repo.NewsRepository;
+import com.example.ItSolutionCore.businesses.sunrise.repo.SunriseFileRepository;
+import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.util.GenericUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
 public class NewsService {
     private final NewsRepository newsRepository;
     private final SunrisePublicFileService sunrisePublicFileService;
+
+    private final SunriseFileRepository sunriseFileRepository;
 
     public void postNews(MultipartFile file, String title, String startDate, String endDate, String time, String dayOfWeek, boolean recurring, String description) throws IOException, ParseException {
 
@@ -58,5 +63,19 @@ public class NewsService {
                   newsDto.setS3_url(s3_url);
                    return newsDto;
                }).collect(Collectors.toList());
+    }
+
+    public void delete(Long id) throws DataNotFoundException {
+
+
+
+        News target =  newsRepository.findByIdWithImage(id).orElseThrow(()-> new DataNotFoundException("news not found"));
+        News targetWithoutImage =  newsRepository.findById(id).orElseThrow(()-> new DataNotFoundException("news not found"));
+        // NewsService is not an owner of the relationship. So, need to delete corresponding SunriseFile First.
+        SunriseFile targetImage = target.getSunriseFiles().get(0);
+        newsRepository.save(target);
+        sunrisePublicFileService.delete(targetImage.getId());
+
+        newsRepository.delete(targetWithoutImage);
     }
 }

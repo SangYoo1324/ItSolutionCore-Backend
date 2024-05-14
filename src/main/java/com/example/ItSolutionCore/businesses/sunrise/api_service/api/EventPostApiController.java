@@ -2,6 +2,7 @@ package com.example.ItSolutionCore.businesses.sunrise.api_service.api;
 
 
 import com.example.ItSolutionCore.businesses.sunrise.api_service.service.EventPostService;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.EventPostDto;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -22,23 +24,23 @@ public class EventPostApiController {
 
     private final EventPostService eventPostService;
 
-    @PostMapping(value="/event")
+    @PostMapping(value = "/event")
     public ResponseEntity<?> uploadRegular(@RequestParam("title") String title,
-                                               @RequestParam("date") String date,
-                                               @RequestParam("time") String time,
-                                               @RequestParam("description") String description,
-                                               @RequestParam("file") MultipartFile multipartFile){
+                                           @RequestParam("date") String date,
+                                           @RequestParam("time") String time,
+                                           @RequestParam("description") String description,
+                                           @RequestParam("file") MultipartFile multipartFile) {
 
         try {
-            eventPostService.postRegularEvent(title,date,time, description,multipartFile);
+            eventPostService.postRegularEvent(title, date, time, description, multipartFile);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Successfully uploaded")
                     .build());
         } catch (IOException e) {
             e.printStackTrace();
-          log.error("Error occured during uploading multipartFile to S3");
+            log.error("Error occured during uploading multipartFile to S3");
 
-          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500)
-                  .build());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500)
+                    .build());
         } catch (DataNotFoundException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500)
                     .build());
@@ -48,38 +50,33 @@ public class EventPostApiController {
     }
 
 
-    @GetMapping(value="/events")
-    public ResponseEntity<?> fetchAll(){
+    @GetMapping(value = "/events")
+    public ResponseEntity<?> fetchAll() {
 
 
-
-            return ResponseEntity.status(HttpStatus.OK).body(   eventPostService.fetchAll());
-
-
-
+        return ResponseEntity.status(HttpStatus.OK).body(eventPostService.fetchAll());
     }
 
 
-
-    @PostMapping(value="/event/recurring/weekly")
+    @PostMapping(value = "/event/recurring/weekly")
     public ResponseEntity<?> uploadWeekly(@RequestParam("title") String title,
-                                               @RequestParam("date") String date,
-                                               @RequestParam("time") String time,
-                                               @RequestParam("description") String description,
-                                               @RequestParam("file") MultipartFile multipartFile){
+                                          @RequestParam("date") String date,
+                                          @RequestParam("time") String time,
+                                          @RequestParam("description") String description,
+                                          @RequestParam("file") MultipartFile multipartFile) {
 
 
         try {
-            eventPostService.postWeeklyEvent(title,date,time,description,multipartFile);
-         return   ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().response("Upload weekly events complete").build());
+            eventPostService.postWeeklyEvent(title, date, time, description, multipartFile);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().response("Upload weekly events complete").build());
         } catch (IOException e) {
-          return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500).build());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500).build());
         }
 
 
     }
 
-//    @PostMapping(value="/event/recurring/monthly")
+    //    @PostMapping(value="/event/recurring/monthly")
 //    public ResponseEntity<EventPostDto> upload(@RequestParam("title") String title,
 //                                               @RequestParam("date") String date,
 //                                               @RequestParam("time") String time,
@@ -91,5 +88,16 @@ public class EventPostApiController {
 //
 //
 //    }
+    @DeleteMapping(value = "/event/{id}")
+    public ResponseEntity<?> uploadWeekly(@PathVariable Long id) {
 
+        try {
+            eventPostService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Deleted").build());
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().errorCode(500).build());
+        }
+
+    }
 }

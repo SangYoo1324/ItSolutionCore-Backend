@@ -2,6 +2,7 @@ package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 
 
 import com.example.ItSolutionCore.businesses.sunrise.BusinessVars_sunrise;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.EventPostDto;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.EventPost;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.SunriseFile;
 import com.example.ItSolutionCore.businesses.sunrise.repo.EventPostRepository;
@@ -22,6 +23,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -134,12 +136,20 @@ public class EventPostService {
     }
 
 
-    public List<EventPost> fetchAll(){
-        return   eventPostRepository.findAll();
+    public List<EventPostDto> fetchAll(){
+        return   eventPostRepository.findAll_join_img().stream().map(EventPost::toEventPostDto).collect(Collectors.toList());
     }
 
 
 
+    public void delete(Long id) throws DataNotFoundException {
+
+
+
+        eventPostRepository.delete(
+                eventPostRepository.findById(id).orElseThrow(()-> new DataNotFoundException("eventPost not found"))
+        );
+    }
 
 
 

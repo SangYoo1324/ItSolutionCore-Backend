@@ -57,6 +57,19 @@ public class PhotoEventApiController {
         return ResponseEntity.status(HttpStatus.OK).body(photoEventService.fetchPhotoEvents());
     }
 
+    @DeleteMapping(value = "/photo/{id}")
+    public ResponseEntity<?> uploadWeekly(@PathVariable Long id) {
+
+        try {
+            photoEventService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Deleted").build());
+        } catch (DataNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().errorCode(500).build());
+        }
+
+    }
+
 }
 
 

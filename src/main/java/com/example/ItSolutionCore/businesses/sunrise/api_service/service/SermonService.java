@@ -3,6 +3,7 @@ package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonDto;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.Sermon;
 import com.example.ItSolutionCore.businesses.sunrise.repo.SermonRepository;
+import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,12 @@ public class SermonService {
         return sermonRepository.findAll().stream().map(Sermon::toDto).collect(Collectors.toList());
     }
 
+    public void delete(Long id) throws DataNotFoundException {
+
+
+
+        sermonRepository.delete(
+                sermonRepository.findById(id).orElseThrow(()-> new DataNotFoundException("sermon not found"))
+        );
+    }
 }

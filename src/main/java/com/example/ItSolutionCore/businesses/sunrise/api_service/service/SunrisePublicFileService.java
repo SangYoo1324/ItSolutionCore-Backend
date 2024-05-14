@@ -6,6 +6,7 @@ import com.example.ItSolutionCore.businesses.sunrise.data.entity.News;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.PhotoEvent;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.SunriseFile;
 import com.example.ItSolutionCore.businesses.sunrise.repo.SunriseFileRepository;
+import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.service.S3Service;
 import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
 import lombok.RequiredArgsConstructor;
@@ -76,6 +77,10 @@ public class SunrisePublicFileService {
         publicFileDto.setId(savedFile.getId());
 
         return savedFile;
+    }
+
+    public void delete(Long id) throws DataNotFoundException {
+        sunriseFileRepository.delete(sunriseFileRepository.findById(id).orElseThrow(()-> new DataNotFoundException("file not found")));
     }
 
 }

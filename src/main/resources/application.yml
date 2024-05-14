@@ -30,7 +30,7 @@ serverName: local_server
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 
 redirection:

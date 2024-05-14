@@ -55,8 +55,15 @@ public class PhotoEventService {
     public List<PhotoEventDto> fetchPhotoEvents() {
         // it doesn't fetch all the related photoes for each photoEvent.
         // If later required, use fetch join
-        return photoEventRepository.findAll().stream().map(PhotoEvent::toDto).collect(Collectors.toList());
+        return photoEventRepository.findAll_with_img().stream().map(PhotoEvent::toDto).collect(Collectors.toList());
     }
+    public void delete(Long id) throws DataNotFoundException {
 
+
+
+        photoEventRepository.delete(
+                photoEventRepository.findById(id).orElseThrow(()-> new DataNotFoundException("photoEvent not found"))
+        );
+    }
 
 }
