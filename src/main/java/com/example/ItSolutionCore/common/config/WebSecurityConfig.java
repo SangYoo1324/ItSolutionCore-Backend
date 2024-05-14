@@ -81,7 +81,7 @@ public class WebSecurityConfig {
                                 "https://www.sangbeomyooportfolio.com", "https://ps-its.com", "https://www.ps-its.com"));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
-                        configuration.setAllowedHeaders(List.of("GET, POST, PUT, DELETE, OPTIONS, PATCH"));
+                        configuration.setAllowedHeaders(List.of("GET, POST, PUT, DELETE, OPTIONS, PATCH, OPTIONS"));
                         configuration.setMaxAge(3600L);
 
                         configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
