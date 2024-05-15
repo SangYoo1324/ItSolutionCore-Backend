@@ -6,7 +6,13 @@ import com.example.ItSolutionCore.businesses.sunrise.data.dto.PhotoEventDto;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.PhotoEvent;
 import com.example.ItSolutionCore.businesses.sunrise.repo.PhotoEventRepository;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
+@Transactional("sunriseTransactionManager")
 @RequiredArgsConstructor
 public class PhotoEventService {
 
@@ -26,25 +32,39 @@ public class PhotoEventService {
     private final SunrisePublicFileService sunrisePublicFileService;
     private final PhotoEventRepository photoEventRepository;
 
-    public void uploadPhotoEvent(String title, String subTitle, MultipartFile[] multipartFiles) throws IOException {
 
+    @PersistenceContext(unitName = "sunrise")
+    private EntityManager sunriseEntityManager;
+
+
+
+
+    public void uploadPhotoEvent(String title, String subTitle, MultipartFile[] multipartFiles) throws IOException {
+        PhotoEvent photoEvent =     PhotoEvent.builder()
+                .title(title)
+                .subTitle(subTitle)
+                .date(Timestamp.valueOf(LocalDateTime.now()))
+                .build();
         // Make eventPhoto entity- parent
-        PhotoEvent photoEvent = photoEventRepository.save(PhotoEvent.builder()
-                        .title(title)
-                        .subTitle(subTitle)
-                        .date(Timestamp.valueOf(LocalDateTime.now()))
-                .build());
+      sunriseEntityManager.persist(
+              photoEvent
+        );
+//                photoEventRepository.save(PhotoEvent.builder()
+//                        .title(title)
+//                        .subTitle(subTitle)
+//                        .date(Timestamp.valueOf(LocalDateTime.now()))
+//                .build());
+
 
 
         // Make photo entities - child
         for(MultipartFile file :multipartFiles){
             // this method will upload the file into s3 bucket && persist to DB, put photoEvent as an FK
-          sunrisePublicFileService.upload(file, BusinessVars_sunrise.PHOTOEVENT, photoEvent);
+          sunrisePublicFileService.upload(file, BusinessVars_sunrise.PHOTOEVENT,  photoEvent);
         }
     }
 
     public PhotoEventDto fetchPhotoEvent(Long id) throws DataNotFoundException {
-
 
        PhotoEvent photoEvent =  photoEventRepository.fetchPhotoEvent(id).orElseThrow(()-> new DataNotFoundException("cannot find photoEvent with given id"));
 

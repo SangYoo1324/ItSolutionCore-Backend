@@ -39,6 +39,7 @@ public class ItSolutionDataConfig {
         em.setPackagesToScan("com.example.ItSolutionCore.businesses.itSolution.entity"
 //                "com.example.ItSolutionCore.common.itSolution.entity"
         );
+        em.setPersistenceUnitName("itSolution");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         HashMap<String, Object> properties = new HashMap<>();

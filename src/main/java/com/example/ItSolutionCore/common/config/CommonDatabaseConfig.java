@@ -35,10 +35,10 @@ public class CommonDatabaseConfig {
         em.setDataSource(commonDataSource());
         em.setPackagesToScan("com.example.ItSolutionCore.common.entity",
                 "com.example.ItSolutionCore.common.auth.entity"
-//                "com.example.ItSolutionCore.common.itSolution.entity"
         );
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-
+        // unit name is required to distinguish each persistence unit per database
+        em.setPersistenceUnitName("common");
         HashMap<String, Object> properties = new HashMap<>();
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.hbm2ddl.auto", "update");

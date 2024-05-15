@@ -28,7 +28,7 @@ public class PhotoEvent {
     @Column
     private Timestamp date;
 
-    @OneToMany(mappedBy = "photoEvent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "photoEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SunriseFile> files = new ArrayList<>();
 
 

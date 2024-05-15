@@ -66,6 +66,7 @@ public class NewsService {
                .stream().map(n->{
                   String s3_url = n.getSunriseFiles().get(0).getS3_url();
                     log.info("news:"+ n.getTitle());
+                    log.info("s3_url"+ s3_url);
                   NewsDto newsDto = n.toNewsDto();
                   newsDto.setS3_url(s3_url);
                    return newsDto;

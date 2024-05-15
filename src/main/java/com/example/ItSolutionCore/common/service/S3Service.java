@@ -38,7 +38,7 @@ public class S3Service {
         log.info("File Extention = "+ ext);
 
         // filename will be like businessName_photoEvent_123jl1eio2.jpeg
-        String uuidFileName = business+"_"+category+"_"+UUID.randomUUID()+ ext;
+        String uuidFileName = business+"_"+category+"_"+fileName.split("\\.")[0]+UUID.randomUUID()+ ext;
         String localPath = localLocation+ uuidFileName;
 
         // transfer Multipart file to local file

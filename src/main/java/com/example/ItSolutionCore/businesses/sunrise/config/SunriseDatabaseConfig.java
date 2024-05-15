@@ -36,7 +36,7 @@ public class SunriseDatabaseConfig {
     @Bean
     public EntityManagerFactory sunriseEntityManager(){
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-
+        em.setPersistenceUnitName("sunrise");
         em.setDataSource(sunriseDataSource());
         em.setPackagesToScan("com.example.ItSolutionCore.businesses.sunrise");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());

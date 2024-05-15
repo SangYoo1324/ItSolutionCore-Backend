@@ -27,6 +27,8 @@ public class SunrisePublicFileService {
 
     private final S3Service s3Service;
 
+
+
     public SunriseFile upload(MultipartFile multipartFile, String category) throws IOException {
 
        PublicFileDto publicFileDto =  s3Service.imageUpload(multipartFile,BusinessVars_sunrise.BUSINESS, category);
@@ -77,10 +79,9 @@ public class SunrisePublicFileService {
 
 
 // because initial publicFileDto has no ID cuz it's before SQL transaction
-      SunriseFile savedFile = sunriseFileRepository.save(file);
-        publicFileDto.setId(savedFile.getId());
 
-        return savedFile;
+
+        return sunriseFileRepository.save(file);
     }
 
     public void delete(Long id) throws DataNotFoundException {
