@@ -39,6 +39,7 @@ public class PhotoEvent {
                 .s3_urls(this.files.size() == 0 ? null : this.files.stream().map(SunriseFile::getS3_url).collect(Collectors.toList()))
                 .subTitle(this.subTitle)
                 .title(this.title)
+                .date(this.date)
                 .build();
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -14,5 +15,6 @@ public class PhotoEventDto {
     private String title;
     private String subTitle;
     private List<String> s3_urls;
+    private Timestamp date;
 
 }
