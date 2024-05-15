@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class EventPostService {
 
-    private final S3Service s3Service;
 
     private final EventPostRepository eventPostRepository;
 
@@ -41,8 +40,7 @@ public class EventPostService {
     private EntityManager sunriseEntityManager;
 
 
-    public EventPostService(S3Service s3Service, EventPostRepository eventPostRepository, SunrisePublicFileService sunrisePublicFileService) {
-        this.s3Service = s3Service;
+    public EventPostService( EventPostRepository eventPostRepository, SunrisePublicFileService sunrisePublicFileService) {
         this.eventPostRepository = eventPostRepository;
         this.sunrisePublicFileService = sunrisePublicFileService;
 

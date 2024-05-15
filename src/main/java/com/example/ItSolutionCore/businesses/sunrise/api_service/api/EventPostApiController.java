@@ -68,7 +68,7 @@ public class EventPostApiController {
 
         try {
             eventPostService.postWeeklyEvent(title, date, time, description, multipartFile);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().response("Upload weekly events complete").build());
+            return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Upload weekly events complete").build());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500).build());
         }

@@ -47,7 +47,7 @@ public class NewsApiController {
 
     @GetMapping(value="/news")
     public ResponseEntity<?> fetchAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(newsService.fetchAllEvents());
+        return ResponseEntity.status(HttpStatus.OK).body(newsService.fetchAllNews());
     }
 
     @DeleteMapping(value = "/news/{id}")

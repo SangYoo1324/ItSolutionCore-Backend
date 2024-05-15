@@ -10,6 +10,7 @@ import com.example.ItSolutionCore.common.exception.DataNotFoundException;
 import com.example.ItSolutionCore.common.service.S3Service;
 import com.example.ItSolutionCore.common.uni_dto.PublicFileDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class SunrisePublicFileService {
 
     private final SunriseFileRepository sunriseFileRepository;
@@ -28,17 +30,17 @@ public class SunrisePublicFileService {
     public SunriseFile upload(MultipartFile multipartFile, String category) throws IOException {
 
        PublicFileDto publicFileDto =  s3Service.imageUpload(multipartFile,BusinessVars_sunrise.BUSINESS, category);
+        log.info("checkPoint>>");
+        return sunriseFileRepository.save(SunriseFile.builder()
+                         .contentType(publicFileDto.getContentType())
+                         .size(publicFileDto.getSize())
+                         .s3_url(publicFileDto.getS3_url())
+                         .filePath(publicFileDto.getFilePath()) // to determine it's uploaded from prod OR dev env
+                         .registeredDate(publicFileDto.getRegisteredDate())
+                         .fileName(publicFileDto.getFileName())
+                         .s3_url(publicFileDto.getS3_url())
+                 .build());
 
-      return sunriseFileRepository.save(SunriseFile.builder()
-                       .contentType(publicFileDto.getContentType())
-                       .size(publicFileDto.getSize())
-                       .s3_url(publicFileDto.getS3_url())
-                       .filePath(publicFileDto.getFilePath()) // to determine it's uploaded from prod OR dev env
-                       .registeredDate(publicFileDto.getRegisteredDate())
-                       .fileName(publicFileDto.getFileName())
-                       .s3_url(publicFileDto.getS3_url())
-               .build()
-       );
 
     }
     // overloaded for upload with photoEvent
@@ -58,10 +60,12 @@ public class SunrisePublicFileService {
 //         .photoEvent(photoEvent)
         switch (entity.getClass().getSimpleName()){
             case "PhotoEvent":
+                log.info("branch: "+ entity.getClass().getSimpleName());
                 file.setPhotoEvent((PhotoEvent) entity);
                 break;
 
             case "News":
+                log.info("branch: "+ entity.getClass().getSimpleName());
                 file.setNews((News) entity);
                 break;
 

@@ -32,11 +32,11 @@ public class SunriseFile {
     @Column
     private Timestamp registeredDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="photoEvent_id", referencedColumnName = "id")
     private PhotoEvent photoEvent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="news_id", referencedColumnName = "id")
     private News news;
 

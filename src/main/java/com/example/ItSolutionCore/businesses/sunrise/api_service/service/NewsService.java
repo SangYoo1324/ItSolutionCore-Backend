@@ -54,11 +54,18 @@ public class NewsService {
     }
 
 
-    public List<NewsDto> fetchAllEvents(){
-       return  newsRepository.fetchAllNewsWithImage()
+    public List<NewsDto> fetchAllNews(){
+       return
+//               newsRepository.findAll().stream().map(n->{
+//                  NewsDto newsDto =  n.toNewsDto();
+//                  newsDto.setS3_url("test");
+//                  return newsDto;
+//               }).collect(Collectors.toList());
+
+               newsRepository.fetchAllNewsWithImage()
                .stream().map(n->{
                   String s3_url = n.getSunriseFiles().get(0).getS3_url();
-
+                    log.info("news:"+ n.getTitle());
                   NewsDto newsDto = n.toNewsDto();
                   newsDto.setS3_url(s3_url);
                    return newsDto;
@@ -66,9 +73,6 @@ public class NewsService {
     }
 
     public void delete(Long id) throws DataNotFoundException {
-
-
-
         News target =  newsRepository.findByIdWithImage(id).orElseThrow(()-> new DataNotFoundException("news not found"));
         News targetWithoutImage =  newsRepository.findById(id).orElseThrow(()-> new DataNotFoundException("news not found"));
         // NewsService is not an owner of the relationship. So, need to delete corresponding SunriseFile First.

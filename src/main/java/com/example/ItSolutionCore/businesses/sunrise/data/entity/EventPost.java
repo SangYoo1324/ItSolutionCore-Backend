@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -37,7 +38,8 @@ public class EventPost {
                 .id(this.id)
                 .title(this.title)
                 .date(this.date.toString().substring(0,10))
-                .s3_url(this.image.getS3_url())
+
+                .s3_url(this.image == null ? "https://sammyoopublicbucket.s3.us-west-2.amazonaws.com/post_event_replace_img.jpg" :this.image.getS3_url())
                 .time(this.time)
                 .description(this.description)
                 .build();

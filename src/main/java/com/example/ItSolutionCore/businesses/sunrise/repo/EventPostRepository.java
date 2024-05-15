@@ -15,6 +15,6 @@ public interface EventPostRepository extends JpaRepository<EventPost, Long> {
     @Query("select e from EventPost e join fetch e.image")
     Optional<EventPost> fetchAll_join_img(Long id);
 
-    @Query("select e from EventPost e join fetch e.image")
+    @Query("select e from EventPost e left join fetch e.image")
     List<EventPost> findAll_join_img();
 }
