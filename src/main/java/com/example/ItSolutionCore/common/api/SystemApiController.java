@@ -42,7 +42,6 @@ public class SystemApiController {
         resp.put("serverAddress", serverAddress);
         resp.put("serverPort", serverPort);
         resp.put("env", env);
-        log.info("hc api");
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("hi").build());
     }
 
