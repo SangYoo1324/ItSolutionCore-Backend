@@ -107,7 +107,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/error").permitAll()// error path(not api url)
                         .requestMatchers("/api/auth/**").authenticated()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // for regular login filter
                 .addFilterAt(new JwtLoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, memberRepository), UsernamePasswordAuthenticationFilter.class)

@@ -29,27 +29,27 @@ public class RedisUtilService {
 
     private final CacheManager cacheManager;
 
-    public String getData(String key){
+    public String getData(String key, String cacheNames){
 
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
-        return String.valueOf(valueOperations.get(key));
+        return valueOperations.get(key+"::"+cacheNames) != null ? String.valueOf(valueOperations.get(key+":"+cacheNames) ):  null;
     }
 
 
-    public void setData(String key,String value) {
+    public void setData(String key,String value, String cacheNames) {
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(key, value);
+        valueOperations.set(key+"::"+cacheNames, value);
     }
 
-    public void setDataExpire(String key, String value, long duration){
+    public void setDataExpire(String key, String value,String cacheNames ,long duration){
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         Duration expDura = Duration.ofSeconds(duration);
-        valueOperations.set(key,value,expDura);
+        valueOperations.set(key+"::"+cacheNames,value,expDura);
     }
 
 
-    public void deleteData(String key) {
-        redisTemplate.delete(key);
+    public void deleteData(String key, String cacheNames) {
+        redisTemplate.delete(key+":"+cacheNames);
     }
 
 
@@ -63,6 +63,7 @@ public class RedisUtilService {
                 .token("token")
                 .build();
     }
+
 // for UPDATE request : it always execute the method
     @CachePut(cacheNames = "test", key= "#id", cacheManager = "redisCacheManager", condition ="#id<10 and #id!=0")
     public RedisTestEntity cachePutTest(Long id){

@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 @SuperBuilder
-public class UserDto {
+public class UserRequestDto {
 
     protected Long id;
 
@@ -29,12 +29,12 @@ public class UserDto {
 
     protected List<EventRequestDto> events;
 
-    public UserDto(){
+    public UserRequestDto(){
 
     }
 
 
-    public UserDto(Long id, Long company_id, String firstName, String lastName, String profile_pic, String password, String email) {
+    public UserRequestDto(Long id, Long company_id, String firstName, String lastName, String profile_pic, String password, String email) {
         this.id = id;
         this.company_id = company_id;
         this.firstName = firstName;
@@ -43,4 +43,6 @@ public class UserDto {
         this.password = password;
         this.email = email;
     }
+
+
 }

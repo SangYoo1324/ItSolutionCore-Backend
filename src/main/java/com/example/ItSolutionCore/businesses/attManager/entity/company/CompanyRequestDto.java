@@ -1,7 +1,6 @@
 package com.example.ItSolutionCore.businesses.attManager.entity.company;
 
 
-import com.example.ItSolutionCore.businesses.attManager.entity.company.Company;
 import com.example.ItSolutionCore.businesses.attManager.entity.user.User;
 import com.example.ItSolutionCore.businesses.attManager.enums.Plan;
 import lombok.AllArgsConstructor;
@@ -18,11 +17,13 @@ import java.util.List;
 @Data
 @Slf4j
 @Builder
-public class CompanyDto {
+public class CompanyRequestDto {
     private Long id;
     private String name;
     private Plan plan;
     private List<User> users = new ArrayList<>();
+
+    private String timezone;
 
     public Company toCompany() {
 

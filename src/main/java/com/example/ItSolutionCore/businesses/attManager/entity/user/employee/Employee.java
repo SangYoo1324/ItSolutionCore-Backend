@@ -1,28 +1,65 @@
-package com.example.ItSolutionCore.businesses.attManager.entity;
+package com.example.ItSolutionCore.businesses.attManager.entity.user.employee;
 
 
+import com.example.ItSolutionCore.businesses.attManager.entity.company.Company;
+import com.example.ItSolutionCore.businesses.attManager.entity.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@AllArgsConstructor
+
 @NoArgsConstructor
-@Data
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="EMP_TYPE", discriminatorType = DiscriminatorType.STRING)
-public class Employee {
+@SuperBuilder
+@Getter
+@Setter
+@DiscriminatorValue("employee")
+@Table(name="employee")
+public class Employee extends User {
+    public Employee(Long id, Company company, String firstName, String lastName, String profile_pic, String password, String email, String job, int employeeID) {
+        super(id, company, firstName, lastName, profile_pic, password, email);
+        this.job = job;
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    public Employee(String job) {
+        this.job = job;
+    }
 
-    protected Long company_id;
-    protected String name;
-    protected String img_url;
-    protected String password;
-    protected String email;
+    public Employee(UserBuilder<?, ?> b, String job, Long employeeID) {
+        super(b);
+        this.job = job;
+        this.employeeID =  employeeID;
+    }
+
+    protected String job;
+    protected Long employeeID;
 
 
+
+    public EmployeeResponseDto toResponseDto(){
+        return EmployeeResponseDto.builder()
+                .job(this.getJob())
+                .employeeID(this.getEmployeeID())
+                .company(this.getCompany().toResponseDto())
+                .email(this.getEmail())
+                .firstName(this.getFirstName())
+                .lastName(this.getLastName())
+                .profile_pic(this.getProfile_pic())
+                .id(this.getId())
+                .build();
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "job='" + job + '\'' +
+                ", id=" + id +
+                ", company=" + company +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", profile_pic='" + profile_pic + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

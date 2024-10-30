@@ -1,2 +1,6 @@
-package com.example.ItSolutionCore.businesses.attManager;public enum Plan {
+package com.example.ItSolutionCore.businesses.attManager.enums;
+
+public enum Plan {
+    REGULAR,
+    PREMIUM
 }

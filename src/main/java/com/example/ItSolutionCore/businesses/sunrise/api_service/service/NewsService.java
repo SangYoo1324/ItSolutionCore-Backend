@@ -56,14 +56,11 @@ public class NewsService {
 
     public List<NewsDto> fetchAllNews(){
        return
-//               newsRepository.findAll().stream().map(n->{
-//                  NewsDto newsDto =  n.toNewsDto();
-//                  newsDto.setS3_url("test");
-//                  return newsDto;
-//               }).collect(Collectors.toList());
+//               newsRepository.findAll().stream().map(News::toNewsDto).collect(Collectors.toList());
 
                newsRepository.fetchAllNewsWithImage()
                .stream().map(n->{
+                   log.info("newsEntity: {}" , n.getSunriseFiles());
                   String s3_url = n.getSunriseFiles().get(0).getS3_url();
                     log.info("news:"+ n.getTitle());
                     log.info("s3_url"+ s3_url);

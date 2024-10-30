@@ -1,2 +1,15 @@
-package com.example.ItSolutionCore.businesses.attManager.repo;public interface UserRepository {
+package com.example.ItSolutionCore.businesses.attManager.repo;
+
+import com.example.ItSolutionCore.businesses.attManager.entity.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User,Long> {
+    @Query("select u from User u where u.company.id=:id")
+     Optional<List<User>> findAllByCompanyId(Long id);
 }

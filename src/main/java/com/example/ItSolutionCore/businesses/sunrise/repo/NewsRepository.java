@@ -12,7 +12,7 @@ public interface NewsRepository extends JpaRepository<News,Long> {
     @Query("select n from News n join fetch n.sunriseFiles where n.id = :id")
     Optional<News> findByIdWithImage(Long id);
 
-    @Query("select n from News n join fetch n.sunriseFiles")
+    @Query("select n from News n left join fetch n.sunriseFiles")
     List<News> fetchAllNewsWithImage();
 
 }

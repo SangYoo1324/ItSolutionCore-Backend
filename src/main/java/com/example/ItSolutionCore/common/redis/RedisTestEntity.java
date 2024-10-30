@@ -1,8 +1,8 @@
 package com.example.ItSolutionCore.common.redis;
 
 
-import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
@@ -12,15 +12,15 @@ import org.springframework.data.redis.core.index.Indexed;
 * */
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@RedisHash
+@RedisHash(value = "test") // 5분 , timeToLive = 360
+@ToString
 public class RedisTestEntity {
-    @Id
+    @Id  // jakarta.persistence (x) / .data.annotation.Id (o)
     private String id;
 
-    @Indexed
     private String token;
 
     @TimeToLive

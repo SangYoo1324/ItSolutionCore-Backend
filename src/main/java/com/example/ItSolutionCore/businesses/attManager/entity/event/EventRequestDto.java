@@ -1,22 +1,17 @@
 package com.example.ItSolutionCore.businesses.attManager.entity.event;
 
-import com.example.ItSolutionCore.businesses.attManager.entity.company.Company;
-import com.example.ItSolutionCore.businesses.attManager.entity.user.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Timestamp;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Slf4j
 @Builder
-public class EventDto {
+public class EventRequestDto {
 
     private Long id;
     private Long user_id;

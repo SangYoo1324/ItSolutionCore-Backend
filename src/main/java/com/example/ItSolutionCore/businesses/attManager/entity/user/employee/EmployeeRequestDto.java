@@ -1,10 +1,7 @@
 package com.example.ItSolutionCore.businesses.attManager.entity.user.employee;
 
 
-import com.example.ItSolutionCore.businesses.attManager.entity.company.Company;
-import com.example.ItSolutionCore.businesses.attManager.entity.user.User;
-import com.example.ItSolutionCore.businesses.attManager.entity.user.UserDto;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.example.ItSolutionCore.businesses.attManager.entity.user.UserRequestDto;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -12,23 +9,23 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class EmployeeDto extends UserDto {
+public class EmployeeRequestDto extends UserRequestDto {
   protected String job;
   protected Long employeeID;
 
-  public EmployeeDto(){
+  public EmployeeRequestDto(){
 
   }
 
 
-  public EmployeeDto(Long id, Long company_id, String firstName, String lastName, String profile_pic, String password, String email, String job) {
+  public EmployeeRequestDto(Long id, Long company_id, String firstName, String lastName, String profile_pic, String password, String email, String job) {
     super(id, company_id, firstName, lastName, profile_pic, password, email);
     this.job = job;
   }
 
   @Override
   public String toString() {
-    return "EmployeeDto{" +
+    return "EmployeeRequestDto{" +
             "job='" + job + '\'' +
             ", id=" + id +
             ", company_id=" + company_id +

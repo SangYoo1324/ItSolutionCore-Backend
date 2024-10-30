@@ -18,7 +18,7 @@ public class RedisTestApiController {
     @GetMapping("/redis/test/{key}")
     public ResponseEntity<?> raw_getTest(@PathVariable String key) {
 
-        String result = redisUtilService.getData(key);
+        String result = redisUtilService.getData(key, "test");
 
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
@@ -27,7 +27,7 @@ public class RedisTestApiController {
     @PostMapping("/redis/test/{key}/{value}")
     public ResponseEntity<?> raw_SetTest(@PathVariable String key, @PathVariable String value) {
 
-        redisUtilService.setData(key, value);
+        redisUtilService.setData(key, value, "test");
 
 
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("set").build());
@@ -36,17 +36,24 @@ public class RedisTestApiController {
 
     @DeleteMapping("/redis/test/{key}")
     public ResponseEntity<?> raw_DeleteTest(@PathVariable String key) {
-        redisUtilService.deleteData(key);
+        redisUtilService.deleteData(key, "test");
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("delete").build());
     }
 
 
 
     // Caching Annotation Test
-
     @PostMapping("/redis/test/annotation/{id}")
     public ResponseEntity<?> annotation_cache_Set(@PathVariable Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(redisUtilService.cacheableTest(id));
+    }
+
+
+
+    @PostMapping("/redis/entity/test/{id}")
+    public ResponseEntity<?> entity_test(@PathVariable Long id) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(redisUtilService.saveEntity(String.valueOf(id),"tokenEx", 60));
     }
 }
