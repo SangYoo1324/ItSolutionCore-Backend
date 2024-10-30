@@ -53,6 +53,9 @@ spring:
         registration:
           google:
             redirect-uri: "https://ps-its.com/login/oauth2/code/google"
+  servlet:
+    multipart:
+      location: "/home/ubuntu/temp/multipart"
 server:
   port: 8080
   serverAddress: 100.21.105.141
@@ -67,7 +70,7 @@ redirection:
 
 s3:
   local:
-    path: "/home/ubuntu/"
+    path: "/home/ubuntu/temp"
 
 logging:
   level:
@@ -84,6 +87,9 @@ spring:
         registration:
           google:
             redirect-uri: "https://ps-its.com/login/oauth2/code/google"
+  servlet:
+    multipart:
+      location: "/home/ubuntu/temp/multipart"
 server:
   port: 8081
   serverAddress: 100.21.105.141
@@ -97,7 +103,7 @@ redirection:
 
 s3:
   local:
-    path: "/home/ubuntu/"
+    path: "/home/ubuntu/temp"
 
 logging:
   level:

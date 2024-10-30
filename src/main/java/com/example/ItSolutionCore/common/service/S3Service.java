@@ -44,7 +44,7 @@ public class S3Service {
         // transfer Multipart file to local file
         File localFile = new File(localPath);
         file.transferTo(localFile);
-
+        log.info("file created at:  {}",localFile.getAbsolutePath());
         s3Config.amazonS3Client()               //              key         object
                 .putObject(new PutObjectRequest(bucketName, uuidFileName, localFile)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
