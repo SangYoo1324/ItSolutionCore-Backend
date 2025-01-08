@@ -37,10 +37,10 @@ public class EventPost {
         return EventPostDto.builder()
                 .id(this.id)
                 .title(this.title)
-                .date(this.date.toString().substring(0,10))
-
+//                .date(this.date.toString().substring(0,10))
+                .date(this.date.getTime())
                 .s3_url(this.image == null ? "https://sammyoopublicbucket.s3.us-west-2.amazonaws.com/post_event_replace_img.jpg" :this.image.getS3_url())
-                .time(this.time)
+//                .time(this.time)
                 .description(this.description)
                 .build();
     }

@@ -89,7 +89,7 @@ public class EventPostApiController {
 //
 //    }
     @DeleteMapping(value = "/event/{id}")
-    public ResponseEntity<?> uploadWeekly(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
 
         try {
             eventPostService.delete(id);

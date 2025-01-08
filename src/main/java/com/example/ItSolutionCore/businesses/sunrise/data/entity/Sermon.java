@@ -39,7 +39,7 @@ public class Sermon {
     public SermonDto toDto(){
         return SermonDto.builder()
                 .id(this.id)
-                .date(this.date)
+                .date(this.date.getTime())
                 .iframe(this.iframe)
                 .scripture(this.scripture)
                 .title(this.title)

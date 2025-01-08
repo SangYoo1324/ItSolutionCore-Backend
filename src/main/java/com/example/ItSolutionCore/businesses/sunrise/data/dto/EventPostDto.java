@@ -12,9 +12,11 @@ public class EventPostDto {
 
     private String title;
 
-    private String date;
+//    private String date;
+//
+//    private String time;
 
-    private String time;
+    private Long date;
 
     private String s3_url;
 

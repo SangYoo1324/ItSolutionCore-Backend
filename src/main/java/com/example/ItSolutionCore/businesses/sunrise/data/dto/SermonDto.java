@@ -13,6 +13,6 @@ public class SermonDto {
     private Long id;
     private String iframe;
     private String title;
-    private Timestamp date;
+    private Long date;
     private String scripture;
 }
