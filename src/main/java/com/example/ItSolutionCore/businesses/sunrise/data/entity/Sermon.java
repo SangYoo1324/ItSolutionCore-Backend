@@ -1,6 +1,7 @@
 package com.example.ItSolutionCore.businesses.sunrise.data.entity;
 
-import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonRequestDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,10 +37,10 @@ public class Sermon {
         this.scripture = scripture;
     }
 
-    public SermonDto toDto(){
-        return SermonDto.builder()
+    public SermonResponseDto toResponseDto(){
+        return SermonResponseDto.builder()
                 .id(this.id)
-                .date(this.date.getTime())
+                .date(this.date)
                 .iframe(this.iframe)
                 .scripture(this.scripture)
                 .title(this.title)

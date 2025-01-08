@@ -1,15 +1,18 @@
 package com.example.ItSolutionCore.businesses.sunrise.api_service.service;
 
-import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonRequestDto;
+import com.example.ItSolutionCore.businesses.sunrise.data.dto.SermonResponseDto;
 import com.example.ItSolutionCore.businesses.sunrise.data.entity.Sermon;
 import com.example.ItSolutionCore.businesses.sunrise.repo.SermonRepository;
 import com.example.ItSolutionCore.common.exception.DataNotFoundException;
+import com.example.ItSolutionCore.common.util.GenericUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,19 +24,19 @@ public class SermonService {
 
     private final SermonRepository sermonRepository;
 
-    public void postSermon(SermonDto sermonDto){
+    public void postSermon(SermonRequestDto sermonRequestDto) throws ParseException {
 
         sermonRepository.save(Sermon.builder()
-                        .date(new Timestamp(sermonDto.getDate()))
-                        .title(sermonDto.getTitle())
-                        .iframe(sermonDto.getIframe())
-                        .scripture(sermonDto.getScripture())
+                        .date(new Timestamp(GenericUtil.convertToTimeStamp(sermonRequestDto.getDate())))
+                        .title(sermonRequestDto.getTitle())
+                        .iframe(sermonRequestDto.getIframe())
+                        .scripture(sermonRequestDto.getScripture())
                 .build());
 
     }
 
-    public List<SermonDto> fetchAll(){
-        return sermonRepository.findAll().stream().map(Sermon::toDto).collect(Collectors.toList());
+    public List<SermonResponseDto> fetchAll(){
+        return sermonRepository.findAll().stream().map(Sermon::toResponseDto).collect(Collectors.toList());
     }
 
     public void delete(Long id) throws DataNotFoundException {
