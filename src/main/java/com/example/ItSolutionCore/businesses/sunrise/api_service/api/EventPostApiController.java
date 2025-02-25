@@ -26,13 +26,13 @@ public class EventPostApiController {
 
     @PostMapping(value = "/event")
     public ResponseEntity<?> uploadRegular(@RequestParam("title") String title,
-                                           @RequestParam("date") String date,
+                                           @RequestParam("timeStamp") Long timeStamp,
                                            @RequestParam("time") String time,
                                            @RequestParam("description") String description,
                                            @RequestParam("file") MultipartFile multipartFile) {
 
         try {
-            eventPostService.postRegularEvent(title, date, time, description, multipartFile);
+            eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Successfully uploaded")
                     .build());
         } catch (IOException e) {

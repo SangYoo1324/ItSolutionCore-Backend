@@ -46,28 +46,14 @@ public class EventPostService {
 
     }
 
-    public void postRegularEvent(String title, String date, String time, String description, MultipartFile multipartFile) throws IOException, DataNotFoundException {
-        log.info("date String received from client"+ date);
-        // change Date format
-        long timeStamp = 0;
-
-        try {
-            timeStamp = GenericUtil.convertToTimeStamp(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            log.error("cannot parse given String "+date+"into timeStamp");
-        }
-
-        // make EventPost
-
-
+    public void postRegularEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile) throws IOException, DataNotFoundException {
 
         // Upload image with eventPost + relate img to eventPost
           SunriseFile imageEntity = sunrisePublicFileService.upload(multipartFile, BusinessVars_sunrise.EVENT_POST);
 
         EventPost eventPost =  eventPostRepository.save(EventPost.builder()
                 .title(title)
-                .date(new Timestamp(timeStamp))
+                .date(timeStamp)
                 .description(description)
                 .time(time)
                 .image(imageEntity)
@@ -119,7 +105,7 @@ public class EventPostService {
 
             EventPost eventPost =  eventPostRepository.save(EventPost.builder()
                     .title(title)
-                    .date(Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()))
+                    .date(Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()).getTime())
                     .description(description)
                     .time(time)
                     .image(imageEntity)

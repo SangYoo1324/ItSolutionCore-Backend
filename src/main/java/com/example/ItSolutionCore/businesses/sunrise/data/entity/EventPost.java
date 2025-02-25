@@ -22,7 +22,7 @@ public class EventPost {
     @Column
     private String title;
     @Column
-    private Timestamp date;
+    private Long date;
     @Column
     private String time;
     @ManyToOne(fetch =  FetchType.LAZY)
@@ -38,7 +38,7 @@ public class EventPost {
                 .id(this.id)
                 .title(this.title)
 //                .date(this.date.toString().substring(0,10))
-                .date(this.date.getTime())
+                .date(date)
                 .s3_url(this.image == null ? "https://sammyoopublicbucket.s3.us-west-2.amazonaws.com/post_event_replace_img.jpg" :this.image.getS3_url())
 //                .time(this.time)
                 .description(this.description)
