@@ -79,22 +79,22 @@ public class EventPostService {
 
     }
 
-    public void postWeeklyEvent(String title, String date, String time, String description, MultipartFile multipartFile) throws IOException {
+    public void postWeeklyEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile) throws IOException {
 
         // Upload image with eventPost + relate img to eventPost
         SunriseFile imageEntity = sunrisePublicFileService.upload(multipartFile, BusinessVars_sunrise.EVENT_POST);
 
-        log.info("date String received from client"+ date);
+        log.info("date String received from client"+ timeStamp);
         // change Date format
-        long timeStamp = 0;
-
-        try {
-            // still long type
-            timeStamp = GenericUtil.convertToTimeStamp(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            log.error("cannot parse given String "+date+"into timeStamp");
-        }
+//        long timeStamp = 0;
+//
+//        try {
+//            // still long type
+//            timeStamp = GenericUtil.convertToTimeStamp(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            log.error("cannot parse given String "+date+"into timeStamp");
+//        }
 
         // long to timestamp Obj
         Timestamp timestampObj = new Timestamp(timeStamp);

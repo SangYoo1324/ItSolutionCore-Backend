@@ -60,7 +60,7 @@ public class EventPostApiController {
 
     @PostMapping(value = "/event/recurring/weekly")
     public ResponseEntity<?> uploadWeekly(@RequestParam("title") String title,
-                                          @RequestParam("date") String date,
+                                          @RequestParam("date") Long date,
                                           @RequestParam("time") String time,
                                           @RequestParam("description") String description,
                                           @RequestParam("file") MultipartFile multipartFile) {

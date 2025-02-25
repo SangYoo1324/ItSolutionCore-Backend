@@ -27,7 +27,7 @@ public class SermonService {
     public void postSermon(SermonRequestDto sermonRequestDto) throws ParseException {
 
         sermonRepository.save(Sermon.builder()
-                        .date(new Timestamp(GenericUtil.convertToTimeStamp(sermonRequestDto.getDate())))
+                        .date(new Timestamp(sermonRequestDto.getTimeStamp()))
                         .title(sermonRequestDto.getTitle())
                         .iframe(sermonRequestDto.getIframe())
                         .scripture(sermonRequestDto.getScripture())

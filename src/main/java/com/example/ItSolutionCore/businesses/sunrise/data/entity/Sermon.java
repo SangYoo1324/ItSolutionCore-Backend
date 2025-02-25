@@ -40,7 +40,7 @@ public class Sermon {
     public SermonResponseDto toResponseDto(){
         return SermonResponseDto.builder()
                 .id(this.id)
-                .date(this.date)
+                .date(this.date.getTime())
                 .iframe(this.iframe)
                 .scripture(this.scripture)
                 .title(this.title)

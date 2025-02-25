@@ -11,6 +11,6 @@ public class SermonRequestDto {
     private Long id;
     private String iframe;
     private String title;
-    private String date;
+    private Long timeStamp;
     private String scripture;
 }
