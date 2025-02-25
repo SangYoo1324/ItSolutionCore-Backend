@@ -23,13 +23,13 @@ public class Sermon {
     @Column
     private String title;
     @Column
-    private Timestamp date;
+    private Long date;
     @Lob
     private String scripture;
 
 
     @Builder
-    public Sermon(Long id, String iframe, String title, Timestamp date, String scripture) {
+    public Sermon(Long id, String iframe, String title, Long date, String scripture) {
         this.id = id;
         this.iframe = iframe;
         this.title = title;
@@ -40,7 +40,7 @@ public class Sermon {
     public SermonResponseDto toResponseDto(){
         return SermonResponseDto.builder()
                 .id(this.id)
-                .date(this.date.getTime())
+                .date(this.date)
                 .iframe(this.iframe)
                 .scripture(this.scripture)
                 .title(this.title)
