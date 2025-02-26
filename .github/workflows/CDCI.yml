@@ -36,14 +36,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker
-        run: |
-          TIMESTAMP=$(date +%s)
-          docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:$TIMESTAMP .
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:$TIMESTAMP ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest
+        run:
+          docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest1 .
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:$TIMESTAMP ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest1
       - name: Push Docker
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:$TIMESTAMP
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest1
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest1
 
   deploy:
     needs: build
