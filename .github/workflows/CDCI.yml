@@ -36,8 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker
-        run: docker build --no-cache --platform linux/amd64 \ 
-          -t ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution .
+        run: docker build --no-cache --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution .
       - name: Push Docker
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest
 
