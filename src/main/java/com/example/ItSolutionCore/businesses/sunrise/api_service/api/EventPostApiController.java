@@ -30,7 +30,7 @@ public class EventPostApiController {
                                            @RequestParam("time") String time,
                                            @RequestParam("description") String description,
                                            @RequestParam("file") MultipartFile multipartFile) {
-
+        // 문제 부분
         try {
             eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Successfully uploaded")
