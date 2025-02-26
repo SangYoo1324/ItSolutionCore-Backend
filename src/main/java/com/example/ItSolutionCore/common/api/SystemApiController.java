@@ -4,6 +4,7 @@ package com.example.ItSolutionCore.common.api;
 import com.example.ItSolutionCore.common.dto.GenericResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ Health check, docker curl for server check
 
 @RestController
 @Slf4j
+@PropertySource("classpath:version.properties")  // version.properties 파일 사용
 public class SystemApiController {
 
     @Value("${server.env}")  // blue, green, local
@@ -34,6 +36,10 @@ public class SystemApiController {
     @Value("${serverName}") // local_server, green_server, blue_server
     private String serverName;
 
+    @Value("${app.version}")
+    private String appVersion;
+    @Value("${deploy.date}")
+    private String date;
 
     @GetMapping("/hc")
     public ResponseEntity<?> healthCheck(){
@@ -49,5 +55,12 @@ public class SystemApiController {
     public ResponseEntity<?> getEnv(){
 
         return ResponseEntity.status(HttpStatus.OK).body(env);
+    }
+
+    // Use this api to check if the CD/CI pipeline actually done.
+    @GetMapping("/version")
+    public ResponseEntity<?> isApplied(){
+
+        return ResponseEntity.status(HttpStatus.OK).body("app version:"+appVersion+" // "+date);
     }
 }
