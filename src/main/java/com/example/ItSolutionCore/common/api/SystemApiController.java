@@ -38,8 +38,8 @@ public class SystemApiController {
 
     @Value("${app.version}")
     private String appVersion;
-    @Value("${deploy.date}")
-    private String date;
+    @Value("${deploy.description}")
+    private String desc;
 
     @GetMapping("/hc")
     public ResponseEntity<?> healthCheck(){
@@ -61,6 +61,6 @@ public class SystemApiController {
     @GetMapping("/version")
     public ResponseEntity<?> isApplied(){
 
-        return ResponseEntity.status(HttpStatus.OK).body("app version:"+appVersion+" // "+date);
+        return ResponseEntity.status(HttpStatus.OK).body("app version:"+appVersion+" // "+desc);
     }
 }
