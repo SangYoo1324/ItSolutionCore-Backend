@@ -19,8 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +45,7 @@ public class EventPostService {
 
     }
 
-    public void postRegularEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile, String timeZone) throws IOException, DataNotFoundException {
+    public void postRegularEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile) throws IOException, DataNotFoundException {
 
         // Upload image with eventPost + relate img to eventPost
           SunriseFile imageEntity = sunrisePublicFileService.upload(multipartFile, BusinessVars_sunrise.EVENT_POST);
@@ -65,45 +64,75 @@ public class EventPostService {
 
     }
 
-    public void postWeeklyEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile) throws IOException {
+    public void postWeeklyEvent(String title, Long timeStamp, String time, String description, MultipartFile multipartFile, String timeZone) throws IOException {
 
         // Upload image with eventPost + relate img to eventPost
         SunriseFile imageEntity = sunrisePublicFileService.upload(multipartFile, BusinessVars_sunrise.EVENT_POST);
 
         log.info("date Long value received from client"+ timeStamp);
 
+        ZoneId zoneId = ZoneId.of(timeZone);
 
-        // long to timestamp Obj
-        Timestamp timestampObj = new Timestamp(timeStamp);
-        //Timestamp to localDate
-        LocalDate  localDate = timestampObj.toLocalDateTime().toLocalDate();
+        // timeZone에 맞춰서 LocalDateTime으로 변환
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(timeStamp),zoneId);
+        LocalDate localDate = zonedDateTime.toLocalDate();// 해당 타임존에 맞는 날짜를 구함
+//        LocalDateTime startOfMonth = localDate.withDayOfMonth(1).atStartOfDay();// 해당 월의 첫 날
+        LocalDateTime startDate = localDate.atStartOfDay();
+        LocalDateTime endOfMonth = localDate.withDayOfMonth(localDate.lengthOfMonth()).atStartOfDay(); //해당 월의 마지막 날
 
-        // 요일  (WEDNESDAY)
-        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-        log.info("given Date's DayOfWeek:: "+ dayOfWeek);
-
-        // Getting first & last date of the month
-        // withDayOfMonth =  localDate's month's certain date(1, 30 15, etc...)
-        LocalDate firsOfMonth = localDate.withDayOfMonth(1);
-        LocalDate lastOfMonth = localDate.withDayOfMonth(localDate.lengthOfMonth());
-        log.info("First date of the month : "+firsOfMonth+ " / Last date of the month: "+ lastOfMonth);
-        // getting month's first date of 요일 (ex: 달의 첫째 주 n요일)
-        LocalDate firstDateOfDayOfWeek = firsOfMonth.with(TemporalAdjusters.nextOrSame(dayOfWeek));
-        log.info("First Date of" + dayOfWeek+" = "+ firstDateOfDayOfWeek);
-
-        while(!firstDateOfDayOfWeek.isAfter(lastOfMonth)){
-
-            EventPost eventPost =  eventPostRepository.save(EventPost.builder()
+        //시작 날짜로부터 1주일 씩 더하며 반복
+        LocalDateTime eventDate = startDate;
+        while(!eventDate.isAfter(endOfMonth)){
+            // 이벤트 저장
+            EventPost eventPost = eventPostRepository.save(EventPost.builder()
                     .title(title)
-                    .date(Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()).getTime())
+                    .date(Timestamp.valueOf(eventDate).getTime())  // Date가 밀리초로 저장됨
                     .description(description)
                     .time(time)
                     .image(imageEntity)
                     .build());
 
-            firstDateOfDayOfWeek = firstDateOfDayOfWeek.plusWeeks(1);
-            log.info("weekly recurring event "+ Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()));
+            // 1주일 더하기
+            eventDate = eventDate.plusWeeks(1);
+
+            // 로그 추가
+            log.info("Created Event for " + eventDate);
         }
+
+
+//        // long to timestamp Obj
+//        Timestamp timestampObj = new Timestamp(timeStamp);
+//        //Timestamp to localDate
+//        LocalDate  localDate = timestampObj.toLocalDateTime().toLocalDate();
+//
+//
+
+//        // 요일  (WEDNESDAY)
+//        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+//        log.info("given Date's DayOfWeek:: "+ dayOfWeek);
+//
+//        // Getting first & last date of the month
+//        // withDayOfMonth =  localDate's month's certain date(1, 30 15, etc...)
+//        LocalDate firsOfMonth = localDate.withDayOfMonth(1);
+//        LocalDate lastOfMonth = localDate.withDayOfMonth(localDate.lengthOfMonth());
+//        log.info("First date of the month : "+firsOfMonth+ " / Last date of the month: "+ lastOfMonth);
+//        // getting month's first date of 요일 (ex: 달의 첫째 주 n요일)
+//        LocalDate firstDateOfDayOfWeek = firsOfMonth.with(TemporalAdjusters.nextOrSame(dayOfWeek));
+//        log.info("First Date of" + dayOfWeek+" = "+ firstDateOfDayOfWeek);
+//
+//        while(!firstDateOfDayOfWeek.isAfter(lastOfMonth)){
+//
+//            EventPost eventPost =  eventPostRepository.save(EventPost.builder()
+//                    .title(title)
+//                    .date(Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()).getTime())
+//                    .description(description)
+//                    .time(time)
+//                    .image(imageEntity)
+//                    .build());
+//
+//            firstDateOfDayOfWeek = firstDateOfDayOfWeek.plusWeeks(1);
+//            log.info("weekly recurring event "+ Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()));
+//        }
 
 
 

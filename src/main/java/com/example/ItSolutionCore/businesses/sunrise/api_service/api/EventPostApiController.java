@@ -29,11 +29,11 @@ public class EventPostApiController {
                                            @RequestParam("timeStamp") Long timeStamp,
                                            @RequestParam("time") String time,
                                            @RequestParam("description") String description,
-                                           @RequestParam("file") MultipartFile multipartFile,
-                                           @RequestParam("timeZone") String timeZone) {
+                                           @RequestParam("file") MultipartFile multipartFile
+                                           ) {
         // 문제 부분 --latest tag 아얘 없애고 다시 배포
         try {
-            eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile,timeZone);
+            eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Successfully uploaded")
                     .build());
         } catch (IOException e) {
@@ -64,11 +64,12 @@ public class EventPostApiController {
                                           @RequestParam("date") Long date,
                                           @RequestParam("time") String time,
                                           @RequestParam("description") String description,
-                                          @RequestParam("file") MultipartFile multipartFile) {
+                                          @RequestParam("file") MultipartFile multipartFile,
+                                          @RequestParam("timeZone") String timeZone) {
 
 
         try {
-            eventPostService.postWeeklyEvent(title, date, time, description, multipartFile);
+            eventPostService.postWeeklyEvent(title, date, time, description, multipartFile, timeZone);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Upload weekly events complete").build());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(GenericResponseDto.builder().errorCode(500).build());
