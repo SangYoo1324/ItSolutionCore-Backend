@@ -29,10 +29,11 @@ public class EventPostApiController {
                                            @RequestParam("timeStamp") Long timeStamp,
                                            @RequestParam("time") String time,
                                            @RequestParam("description") String description,
-                                           @RequestParam("file") MultipartFile multipartFile) {
+                                           @RequestParam("file") MultipartFile multipartFile,
+                                           @RequestParam("timeZone") String timeZone) {
         // 문제 부분 --latest tag 아얘 없애고 다시 배포
         try {
-            eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile);
+            eventPostService.postRegularEvent(title, timeStamp, time, description, multipartFile,timeZone);
             return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Successfully uploaded")
                     .build());
         } catch (IOException e) {
