@@ -37,8 +37,6 @@ jobs:
 
       - name: Build Docker
         run: docker build --no-cache --platform linux/amd64 \ 
-#          --build-arg APP_VERSION=11 \
-#          --build-arg DEPLOY_DATE="$(date +"%Y-%m-%d %H:%M:%S")" \
           -t ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution .
       - name: Push Docker
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server_itsolution:latest
