@@ -26,7 +26,7 @@ public class EventPostApiController {
 
     @PostMapping(value = "/event")
     public ResponseEntity<?> uploadRegular(@RequestParam("title") String title,
-                                           @RequestParam("date") Long timeStamp,
+                                           @RequestParam("timeStamp") Long timeStamp,
                                            @RequestParam("time") String time,
                                            @RequestParam("description") String description,
                                            @RequestParam("file") MultipartFile multipartFile) {
