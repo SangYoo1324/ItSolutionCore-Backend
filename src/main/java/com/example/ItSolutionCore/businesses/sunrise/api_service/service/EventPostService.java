@@ -101,7 +101,6 @@ public class EventPostService {
         log.info("First Date of" + dayOfWeek+" = "+ firstDateOfDayOfWeek);
 
         while(!firstDateOfDayOfWeek.isAfter(lastOfMonth)){
-            log.info("adding event to "+Timestamp.valueOf(firstDateOfDayOfWeek.atStartOfDay()));
 
             EventPost eventPost =  eventPostRepository.save(EventPost.builder()
                     .title(title)
