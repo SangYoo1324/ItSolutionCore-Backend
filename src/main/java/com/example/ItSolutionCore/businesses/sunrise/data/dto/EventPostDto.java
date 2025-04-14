@@ -14,7 +14,7 @@ public class EventPostDto {
 
 //    private String date;
 //
-//    private String time;
+    private String time;
 
     private Long date;
 
