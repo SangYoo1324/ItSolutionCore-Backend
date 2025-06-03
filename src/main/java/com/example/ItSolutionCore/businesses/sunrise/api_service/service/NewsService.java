@@ -38,8 +38,8 @@ public class NewsService {
         News news = newsRepository.save(
                 News.builder()
                         .title(title)
-                        .startDate( new Timestamp(GenericUtil.convertToTimeStamp(startDate)))
-                        .endDate(new Timestamp(GenericUtil.convertToTimeStamp(endDate)))
+//                        .startDate()
+//                        .endDate(new Timestamp(GenericUtil.convertToTimeStamp(endDate)))
                         .time(time)
                         .dayOfWeek(dayOfWeek)
                         .recurring(recurring)

@@ -17,9 +17,9 @@ public class NewsDto {
 
     private String title;
 
-    private Timestamp startDate;
+    private Long startDate;
 
-    private Timestamp endDate;
+    private Long endDate;
 
     private String time;
 

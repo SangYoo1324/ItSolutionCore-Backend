@@ -22,9 +22,9 @@ public class News {
     @Column
     private String title;
     @Column
-    private Timestamp startDate;
+    private Long startDate;
     @Column
-    private Timestamp endDate;
+    private Long endDate;
     @Column
     String dayOfWeek;
 
@@ -35,7 +35,7 @@ public class News {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
-
+    //참조 당하는쪽이라 부모   SunriseFile이 자식
     @OneToMany(mappedBy ="news", fetch = FetchType.LAZY)
     private List<SunriseFile> sunriseFiles = new ArrayList<>();
 
