@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ Health check, docker curl for server check
 
 @RestController
 @Slf4j
+@RequestMapping("/api/public")
 @PropertySource("classpath:version.properties")  // version.properties 파일 사용
 public class SystemApiController {
 

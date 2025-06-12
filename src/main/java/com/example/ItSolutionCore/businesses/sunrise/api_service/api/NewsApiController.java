@@ -24,8 +24,8 @@ public class NewsApiController {
     @PostMapping(value="/news")
     public ResponseEntity<?> postNews(@RequestParam("file") MultipartFile file,
                                       @RequestParam("title") String title,
-                                      @RequestParam("startDate") String startDate,
-                                      @RequestParam("endDate") String endDate,
+                                      @RequestParam("startDate") Long startDate,
+                                      @RequestParam("endDate") Long endDate,
                                       @RequestParam("time")String time,
                                       @RequestParam("dayOfWeek") String dayOfWeek,
                                       @RequestParam("recurring") boolean recurring,

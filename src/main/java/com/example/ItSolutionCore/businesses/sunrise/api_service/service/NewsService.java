@@ -30,7 +30,7 @@ public class NewsService {
 
     private final SunriseFileRepository sunriseFileRepository;
 
-    public void postNews(MultipartFile file, String title, String startDate, String endDate, String time, String dayOfWeek, boolean recurring, String description) throws IOException, ParseException {
+    public void postNews(MultipartFile file, String title, Long startDate, Long endDate, String time, String dayOfWeek, boolean recurring, String description) throws IOException, ParseException {
 
 
 
@@ -38,8 +38,8 @@ public class NewsService {
         News news = newsRepository.save(
                 News.builder()
                         .title(title)
-//                        .startDate()
-//                        .endDate(new Timestamp(GenericUtil.convertToTimeStamp(endDate)))
+                        .startDate(startDate)
+                        .endDate(endDate)
                         .time(time)
                         .dayOfWeek(dayOfWeek)
                         .recurring(recurring)
