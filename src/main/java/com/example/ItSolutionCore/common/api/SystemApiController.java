@@ -59,7 +59,7 @@ public class SystemApiController {
         return ResponseEntity.status(HttpStatus.OK).body(env);
     }
 
-    // Use this api to check if the CD/CI pipeline actually done.  let's see
+    // Use this api to check if the CD/CI pipeline actually done. 
     @GetMapping("/version")
     public ResponseEntity<?> isApplied(){
 
