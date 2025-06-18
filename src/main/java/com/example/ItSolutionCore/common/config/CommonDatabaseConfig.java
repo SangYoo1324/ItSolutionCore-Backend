@@ -1,5 +1,6 @@
 package com.example.ItSolutionCore.common.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,14 @@ import java.util.HashMap;
         transactionManagerRef =  "commonTransactionManager"
 )
 public class CommonDatabaseConfig {
+
+    @Value("${db.url}")
+    private String dbUrl;
+    @Value("${db.username}")
+    private String dbUser;
+    @Value("${db.password}")
+    private String dbPassword;
+
     @Primary
     @Bean
     public PlatformTransactionManager commonTransactionManager(){
@@ -52,9 +61,9 @@ public class CommonDatabaseConfig {
     public DataSource commonDataSource (){
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://rds-demo.cjykyawcgbun.us-west-2.rds.amazonaws.com/itsolution_core")
-                .username("sam")
-                .password("Qwdf3696!")
+                .url(dbUrl+"/itsolution_core")
+                .username(dbUser)
+                .password(dbPassword)
                 .build();
     }
 }

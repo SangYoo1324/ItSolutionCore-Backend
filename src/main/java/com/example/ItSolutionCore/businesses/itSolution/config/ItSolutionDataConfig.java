@@ -1,5 +1,6 @@
 package com.example.ItSolutionCore.businesses.itSolution.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,13 @@ import java.util.HashMap;
         transactionManagerRef =  "itSolutionTransactionManager"
 )
 public class ItSolutionDataConfig {
+
+    @Value("${db.url}")
+    private String dbUrl;
+    @Value("${db.username}")
+    private String dbUser;
+    @Value("${db.password}")
+    private String dbPassword;
 
 
     @Bean
@@ -55,9 +63,9 @@ public class ItSolutionDataConfig {
     public DataSource itSolutionDataSource (){
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://rds-demo.cjykyawcgbun.us-west-2.rds.amazonaws.com/itSolution")
-                .username("sam")
-                .password("Qwdf3696!")
+                .url(dbUrl+"/itSolution")
+                .username(dbUser)
+                .password(dbPassword)
                 .build();
     }
 

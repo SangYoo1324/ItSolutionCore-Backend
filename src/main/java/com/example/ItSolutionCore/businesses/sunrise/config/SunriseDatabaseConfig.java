@@ -2,6 +2,7 @@ package com.example.ItSolutionCore.businesses.sunrise.config;
 
 
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,13 @@ import java.util.Objects;
         transactionManagerRef =  "sunriseTransactionManager"
 )
 public class SunriseDatabaseConfig {
+
+    @Value("${db.url}")
+    private String dbUrl;
+    @Value("${db.username}")
+    private String dbUser;
+    @Value("${db.password}")
+    private String dbPassword;
 
     @Bean
     public PlatformTransactionManager sunriseTransactionManager(){
@@ -54,9 +62,9 @@ public class SunriseDatabaseConfig {
     public DataSource sunriseDataSource (){
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://rds-demo.cjykyawcgbun.us-west-2.rds.amazonaws.com/sunrise")
-                .username("sam")
-                .password("Qwdf3696!")
+                .url(dbUrl+"/sunrise")
+                .username(dbUser)
+                .password(dbPassword)
                 .build();
     }
 }
