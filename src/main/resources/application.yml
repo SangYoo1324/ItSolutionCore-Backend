@@ -52,14 +52,14 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "https://ps-its.com/login/oauth2/code/google"
+            redirect-uri: "http://ps-its.com/login/oauth2/code/google"
   servlet:
     multipart:
       location: "/home/ubuntu/temp/multipart"
 server:
   port: 8080
-  serverAddress: 100.21.105.141
-  publicAddress: "https://ps-its.com"
+  serverAddress: 44.242.115.211
+  publicAddress: "http://ps-its.com"
 
 serverName: blue_server
 
@@ -86,19 +86,19 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "https://ps-its.com/login/oauth2/code/google"
+            redirect-uri: "http://ps-its.com/login/oauth2/code/google"
   servlet:
     multipart:
       location: "/home/ubuntu/temp/multipart"
 server:
   port: 8081
-  serverAddress: 100.21.105.141
-  publicAddress: "https://ps-its.com"
+  serverAddress: 44.242.115.211
+  publicAddress: "http://ps-its.com"
 serverName: green_server
 
 redirection:
   url:
-    itSolution: "https://www.ps-its.com"
+    itSolution: "https://ps-its.com"
     sunriseCC: "https://sunrisechristcc.org/"
 
 s3:

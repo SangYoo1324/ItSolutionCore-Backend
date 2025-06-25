@@ -115,7 +115,6 @@ public class WebSecurityConfig {
                 .addFilterAfter(new JwtAuthVerifyFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JwtOAuth2VerifyFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 // Need to customize the Exception handling to response back with 401 or 403
-
                 ;
         return http.build();
     }

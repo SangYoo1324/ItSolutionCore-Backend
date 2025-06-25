@@ -89,6 +89,8 @@ public class AuthApiController {
     }
 
 
+
+
     @GetMapping("api/auth/user/test")
     public ResponseEntity<?> userTest(){
         return ResponseEntity.status(HttpStatus.OK).body(GenericResponseDto.builder().response("Authenticateduser API test").build());
