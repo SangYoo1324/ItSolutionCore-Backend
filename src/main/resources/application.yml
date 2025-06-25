@@ -98,7 +98,7 @@ serverName: green_server
 
 redirection:
   url:
-    itSolution: "https://ps-its.com"
+    itSolution: "http://ps-its.com"
     sunriseCC: "https://sunrisechristcc.org/"
 
 s3:
